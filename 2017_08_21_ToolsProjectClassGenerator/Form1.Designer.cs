@@ -36,14 +36,14 @@
             // 
             // LV_Classes
             // 
-            this.LV_Classes.BackColor = System.Drawing.Color.DarkGray;
+            this.LV_Classes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.LV_Classes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.col_classes});
             this.LV_Classes.ForeColor = System.Drawing.Color.OrangeRed;
             this.LV_Classes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.LV_Classes.Location = new System.Drawing.Point(49, 42);
             this.LV_Classes.Name = "LV_Classes";
-            this.LV_Classes.Size = new System.Drawing.Size(199, 546);
+            this.LV_Classes.Size = new System.Drawing.Size(280, 546);
             this.LV_Classes.TabIndex = 0;
             this.LV_Classes.UseCompatibleStateImageBehavior = false;
             this.LV_Classes.View = System.Windows.Forms.View.Details;
@@ -51,11 +51,11 @@
             // col_classes
             // 
             this.col_classes.Text = "Classes";
-            this.col_classes.Width = 137;
+            this.col_classes.Width = 546;
             // 
             // BTN_AddClass
             // 
-            this.BTN_AddClass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BTN_AddClass.BackColor = System.Drawing.Color.Black;
             this.BTN_AddClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_AddClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_AddClass.ForeColor = System.Drawing.Color.OrangeRed;
@@ -65,10 +65,11 @@
             this.BTN_AddClass.TabIndex = 1;
             this.BTN_AddClass.Text = "+";
             this.BTN_AddClass.UseVisualStyleBackColor = false;
+            this.BTN_AddClass.Click += new System.EventHandler(this.BTN_AddClass_Click);
             // 
             // BTN_RemoveClass
             // 
-            this.BTN_RemoveClass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BTN_RemoveClass.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BTN_RemoveClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_RemoveClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_RemoveClass.ForeColor = System.Drawing.Color.OrangeRed;
@@ -78,6 +79,7 @@
             this.BTN_RemoveClass.TabIndex = 2;
             this.BTN_RemoveClass.Text = "-";
             this.BTN_RemoveClass.UseVisualStyleBackColor = false;
+            this.BTN_RemoveClass.Click += new System.EventHandler(this.BTN_RemoveClass_Click);
             // 
             // Form1
             // 
@@ -88,7 +90,7 @@
             this.Controls.Add(this.BTN_RemoveClass);
             this.Controls.Add(this.BTN_AddClass);
             this.Controls.Add(this.LV_Classes);
-            this.ForeColor = System.Drawing.SystemColors.Control;
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -97,7 +99,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView LV_Classes;
+        public System.Windows.Forms.ListView LV_Classes;
         private System.Windows.Forms.ColumnHeader col_classes;
         private System.Windows.Forms.Button BTN_AddClass;
         private System.Windows.Forms.Button BTN_RemoveClass;

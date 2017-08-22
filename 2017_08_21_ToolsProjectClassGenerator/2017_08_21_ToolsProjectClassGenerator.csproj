@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="class_popup.cs">
+    <Compile Include="ClassPopup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="class_popup.Designer.cs">
-      <DependentUpon>class_popup.cs</DependentUpon>
+    <Compile Include="ClassPopup.Designer.cs">
+      <DependentUpon>ClassPopup.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -60,8 +60,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="class_popup.resx">
-      <DependentUpon>class_popup.cs</DependentUpon>
+    <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="ClassPopup.resx">
+      <DependentUpon>ClassPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
