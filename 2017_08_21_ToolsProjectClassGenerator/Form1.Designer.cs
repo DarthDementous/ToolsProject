@@ -32,6 +32,12 @@
             this.col_classes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BTN_AddClass = new System.Windows.Forms.Button();
             this.BTN_RemoveClass = new System.Windows.Forms.Button();
+            this.DLG_FindFile = new System.Windows.Forms.FolderBrowserDialog();
+            this.DGV_SpreadSheet = new System.Windows.Forms.DataGridView();
+            this.BTN_OpenFile = new System.Windows.Forms.Button();
+            this.DLG_OpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.TXT_SheetName = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_SpreadSheet)).BeginInit();
             this.SuspendLayout();
             // 
             // LV_Classes
@@ -81,19 +87,50 @@
             this.BTN_RemoveClass.UseVisualStyleBackColor = false;
             this.BTN_RemoveClass.Click += new System.EventHandler(this.BTN_RemoveClass_Click);
             // 
+            // DGV_SpreadSheet
+            // 
+            this.DGV_SpreadSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_SpreadSheet.Location = new System.Drawing.Point(376, 42);
+            this.DGV_SpreadSheet.Name = "DGV_SpreadSheet";
+            this.DGV_SpreadSheet.Size = new System.Drawing.Size(411, 517);
+            this.DGV_SpreadSheet.TabIndex = 4;
+            // 
+            // BTN_OpenFile
+            // 
+            this.BTN_OpenFile.Location = new System.Drawing.Point(376, 565);
+            this.BTN_OpenFile.Name = "BTN_OpenFile";
+            this.BTN_OpenFile.Size = new System.Drawing.Size(75, 23);
+            this.BTN_OpenFile.TabIndex = 5;
+            this.BTN_OpenFile.Text = "Open File";
+            this.BTN_OpenFile.UseVisualStyleBackColor = true;
+            this.BTN_OpenFile.Click += new System.EventHandler(this.BTN_OpenFile_Click);
+            // 
+            // TXT_SheetName
+            // 
+            this.TXT_SheetName.Location = new System.Drawing.Point(474, 567);
+            this.TXT_SheetName.Name = "TXT_SheetName";
+            this.TXT_SheetName.Size = new System.Drawing.Size(100, 20);
+            this.TXT_SheetName.TabIndex = 6;
+            this.TXT_SheetName.Text = "Sheet Name...";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
             this.ClientSize = new System.Drawing.Size(1264, 682);
+            this.Controls.Add(this.TXT_SheetName);
+            this.Controls.Add(this.BTN_OpenFile);
+            this.Controls.Add(this.DGV_SpreadSheet);
             this.Controls.Add(this.BTN_RemoveClass);
             this.Controls.Add(this.BTN_AddClass);
             this.Controls.Add(this.LV_Classes);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_SpreadSheet)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -103,6 +140,11 @@
         private System.Windows.Forms.ColumnHeader col_classes;
         private System.Windows.Forms.Button BTN_AddClass;
         private System.Windows.Forms.Button BTN_RemoveClass;
+        private System.Windows.Forms.FolderBrowserDialog DLG_FindFile;
+        private System.Windows.Forms.DataGridView DGV_SpreadSheet;
+        private System.Windows.Forms.Button BTN_OpenFile;
+        private System.Windows.Forms.OpenFileDialog DLG_OpenFile;
+        private System.Windows.Forms.TextBox TXT_SheetName;
     }
 }
 

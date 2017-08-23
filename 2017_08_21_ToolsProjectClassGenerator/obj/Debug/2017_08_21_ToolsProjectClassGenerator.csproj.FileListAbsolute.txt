@@ -17,3 +17,4 @@ C:\Users\s171671\Documents\Repositories\ToolsProject\2017_08_21_ToolsProjectClas
 C:\Users\s171671\Documents\Repositories\ToolsProject\2017_08_21_ToolsProjectClassGenerator\obj\Debug\_2017_08_21_ToolsProjectClassGenerator.Form1.resources
 C:\Users\s171671\Documents\Repositories\ToolsProject\2017_08_21_ToolsProjectClassGenerator\obj\Debug\_2017_08_21_ToolsProjectClassGenerator.Properties.Resources.resources
 C:\Users\s171671\Documents\Repositories\ToolsProject\2017_08_21_ToolsProjectClassGenerator\obj\Debug\2017_08_21_ToolsProjectClassGenerator.csproj.GenerateResource.Cache
+C:\Users\s171671\Documents\Repositories\ToolsProject\2017_08_21_ToolsProjectClassGenerator\obj\Debug\2017_08_21_ToolsProjectClassGenerator.csproj.ResolveComReference.cache

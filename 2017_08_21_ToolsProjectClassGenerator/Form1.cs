@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Data.OleDb;
 using Utilities;
 
 namespace _2017_08_21_ToolsProjectClassGenerator
@@ -55,6 +57,77 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 {
                     LV_Classes.Items.Remove((ListViewItem)(item));
                 }
+            }
+        }
+
+        //private void BTN_LoadFile_Click(object sender, EventArgs e)
+        //{
+        //    // Suspends entire program until desired result is found (like a while loop)
+        //    if (DLG_FindFile.ShowDialog() == DialogResult.OK)
+        //    {
+        //        //MessageBox.Show(DLG_FindFile.SelectedPath);
+
+        //        // Save and list files with the specified extension in the chosen folder
+        //        string[] fileNames = Directory.GetFiles(DLG_FindFile.SelectedPath, "*.xlsx");
+
+        //        foreach (string name in fileNames)
+        //        {
+        //            LV_Classes.Items.Add(name);
+        //        }
+        //    }
+        //}
+
+        private void BTN_OpenFile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Filter syntax = "What the user sees | extensions for the computer e.g. *.jpg"
+                DLG_OpenFile.Filter = "XML FILES | *.xml; *.xls; *.xlsx; *.xlsm; *.xlsb;";
+                //DLG_OpenFile.FilterIndex = 2; - Set which filter is selected by default
+
+                DLG_OpenFile.Multiselect        = false;                // One file at a time
+                DLG_OpenFile.Title              = "CHOOSE FILE";       
+                DLG_OpenFile.InitialDirectory   = @"Desktop";
+
+                if (DLG_OpenFile.ShowDialog() == DialogResult.OK)
+                {
+                    string      pathName = DLG_OpenFile.FileName;
+                    string      fileName = Path.GetFileNameWithoutExtension(DLG_OpenFile.FileName);
+                    DataTable   table    = new DataTable();
+
+                    string connectionString = "";
+                    string sheetName        = TXT_SheetName.Text;
+
+                    FileInfo file           = new FileInfo(pathName);
+                    
+                    if (!file.Exists) { throw new Exception("File does not exist."); }
+
+                    string ext = file.Extension;
+
+                    switch (ext)
+                    {
+                        case ".xls":
+                            connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + pathName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
+                            break;
+                        case ".xlsx":
+                            connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + pathName + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1;'";
+                            break;
+                        default:
+                            connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + pathName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
+                            break;
+                    }
+
+                    OleDbConnection     connectionXLS       = new OleDbConnection(connectionString);
+                    OleDbDataAdapter    connectionAdapter   = new OleDbDataAdapter(string.Format("select * from [" + sheetName + "$", fileName), connectionXLS);
+
+                    connectionAdapter.Fill(table);
+
+                    DGV_SpreadSheet.DataSource = table;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("!?!?!??!?!");
             }
         }
     }
