@@ -130,5 +130,25 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 MessageBox.Show("!?!?!??!?!");
             }
         }
+
+        private void CB_FunctionOpt_CheckedChanged(object sender, EventArgs e)
+        {
+            // Flip active status of function options
+            GB_FuncOptions.Enabled = !GB_FuncOptions.Enabled;
+            GB_FuncOptions.Visible = !GB_FuncOptions.Visible;
+        }
+
+        private void BTN_AddParam_Click(object sender, EventArgs e)
+        {
+            var popup = formUtil.GetFormByName("ParamPopup");
+
+            // Only load pop up if it hasn't been loaded before
+            if (popup == null)
+            {
+                // Create new instance of pop up form and display
+                var popupForm = new ParamPopup(this);
+                popupForm.Show();
+            }
+        }
     }
 }
