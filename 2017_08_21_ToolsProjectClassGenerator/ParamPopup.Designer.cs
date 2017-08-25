@@ -34,6 +34,7 @@
             this.RB_PointerOpt = new System.Windows.Forms.RadioButton();
             this.CB_ConstOpt = new System.Windows.Forms.CheckBox();
             this.BTN_ClassConfirm = new System.Windows.Forms.Button();
+            this.RB_ValOpt = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // TXT_ParamName
@@ -72,19 +73,21 @@
             this.RB_ReferenceOpt.TabStop = true;
             this.RB_ReferenceOpt.Text = "Reference";
             this.RB_ReferenceOpt.UseVisualStyleBackColor = true;
+            this.RB_ReferenceOpt.CheckedChanged += new System.EventHandler(this.RB_ReferenceOpt_CheckedChanged);
             // 
             // RB_PointerOpt
             // 
             this.RB_PointerOpt.AutoSize = true;
             this.RB_PointerOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RB_PointerOpt.ForeColor = System.Drawing.Color.White;
-            this.RB_PointerOpt.Location = new System.Drawing.Point(62, 305);
+            this.RB_PointerOpt.Location = new System.Drawing.Point(211, 305);
             this.RB_PointerOpt.Name = "RB_PointerOpt";
             this.RB_PointerOpt.Size = new System.Drawing.Size(111, 29);
             this.RB_PointerOpt.TabIndex = 13;
             this.RB_PointerOpt.TabStop = true;
             this.RB_PointerOpt.Text = "Pointer";
             this.RB_PointerOpt.UseVisualStyleBackColor = true;
+            this.RB_PointerOpt.CheckedChanged += new System.EventHandler(this.RB_PointerOpt_CheckedChanged);
             // 
             // CB_ConstOpt
             // 
@@ -97,6 +100,7 @@
             this.CB_ConstOpt.TabIndex = 15;
             this.CB_ConstOpt.Text = "Is Const";
             this.CB_ConstOpt.UseVisualStyleBackColor = true;
+            this.CB_ConstOpt.CheckedChanged += new System.EventHandler(this.CB_ConstOpt_CheckedChanged);
             // 
             // BTN_ClassConfirm
             // 
@@ -110,6 +114,21 @@
             this.BTN_ClassConfirm.TabIndex = 16;
             this.BTN_ClassConfirm.Text = "Generate Parameter";
             this.BTN_ClassConfirm.UseVisualStyleBackColor = false;
+            this.BTN_ClassConfirm.Click += new System.EventHandler(this.BTN_ClassConfirm_Click);
+            // 
+            // RB_ValOpt
+            // 
+            this.RB_ValOpt.AutoSize = true;
+            this.RB_ValOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RB_ValOpt.ForeColor = System.Drawing.Color.White;
+            this.RB_ValOpt.Location = new System.Drawing.Point(63, 305);
+            this.RB_ValOpt.Name = "RB_ValOpt";
+            this.RB_ValOpt.Size = new System.Drawing.Size(98, 29);
+            this.RB_ValOpt.TabIndex = 17;
+            this.RB_ValOpt.TabStop = true;
+            this.RB_ValOpt.Text = "Value";
+            this.RB_ValOpt.UseVisualStyleBackColor = true;
+            this.RB_ValOpt.CheckedChanged += new System.EventHandler(this.RB_ValOpt_CheckedChanged);
             // 
             // ParamPopup
             // 
@@ -117,6 +136,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(568, 504);
+            this.Controls.Add(this.RB_ValOpt);
             this.Controls.Add(this.BTN_ClassConfirm);
             this.Controls.Add(this.CB_ConstOpt);
             this.Controls.Add(this.RB_ReferenceOpt);
@@ -125,6 +145,7 @@
             this.Controls.Add(this.TXT_ParamName);
             this.Name = "ParamPopup";
             this.Text = "ParamPopup";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +159,6 @@
         private System.Windows.Forms.RadioButton RB_PointerOpt;
         private System.Windows.Forms.CheckBox CB_ConstOpt;
         private System.Windows.Forms.Button BTN_ClassConfirm;
+        private System.Windows.Forms.RadioButton RB_ValOpt;
     }
 }

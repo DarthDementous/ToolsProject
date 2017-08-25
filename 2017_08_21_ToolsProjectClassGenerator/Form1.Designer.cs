@@ -49,9 +49,9 @@
             this.TXT_Type = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.GB_FuncOptions = new System.Windows.Forms.GroupBox();
+            this.BTN_RemoveParam = new System.Windows.Forms.Button();
             this.LV_Params = new System.Windows.Forms.ListView();
             this.col_params = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.BTN_RemoveParam = new System.Windows.Forms.Button();
             this.BTN_AddParam = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SpreadSheet)).BeginInit();
             this.GB_AddMember.SuspendLayout();
@@ -142,6 +142,7 @@
             this.LV_Members.BackColor = System.Drawing.Color.DarkGray;
             this.LV_Members.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.col_members});
+            this.LV_Members.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.LV_Members.Location = new System.Drawing.Point(751, 118);
             this.LV_Members.Name = "LV_Members";
             this.LV_Members.Size = new System.Drawing.Size(369, 776);
@@ -218,6 +219,7 @@
             "EXTERN",
             "INLINE",
             "MUTABLE",
+            "STATIC",
             "VOLATILE"});
             this.CB_Identifiers.Location = new System.Drawing.Point(34, 270);
             this.CB_Identifiers.Name = "CB_Identifiers";
@@ -270,24 +272,6 @@
             this.GB_FuncOptions.Text = "Function Options";
             this.GB_FuncOptions.Visible = false;
             // 
-            // LV_Params
-            // 
-            this.LV_Params.BackColor = System.Drawing.Color.DarkGray;
-            this.LV_Params.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.col_params});
-            this.LV_Params.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LV_Params.Location = new System.Drawing.Point(34, 41);
-            this.LV_Params.Name = "LV_Params";
-            this.LV_Params.Size = new System.Drawing.Size(422, 228);
-            this.LV_Params.TabIndex = 9;
-            this.LV_Params.UseCompatibleStateImageBehavior = false;
-            this.LV_Params.View = System.Windows.Forms.View.Details;
-            // 
-            // col_params
-            // 
-            this.col_params.Text = "Parameters";
-            this.col_params.Width = 419;
-            // 
             // BTN_RemoveParam
             // 
             this.BTN_RemoveParam.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -301,6 +285,26 @@
             this.BTN_RemoveParam.TabIndex = 10;
             this.BTN_RemoveParam.Text = "-";
             this.BTN_RemoveParam.UseVisualStyleBackColor = false;
+            this.BTN_RemoveParam.Click += new System.EventHandler(this.BTN_RemoveParam_Click);
+            // 
+            // LV_Params
+            // 
+            this.LV_Params.BackColor = System.Drawing.Color.DarkGray;
+            this.LV_Params.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.col_params});
+            this.LV_Params.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LV_Params.ForeColor = System.Drawing.Color.MediumBlue;
+            this.LV_Params.Location = new System.Drawing.Point(34, 41);
+            this.LV_Params.Name = "LV_Params";
+            this.LV_Params.Size = new System.Drawing.Size(422, 228);
+            this.LV_Params.TabIndex = 9;
+            this.LV_Params.UseCompatibleStateImageBehavior = false;
+            this.LV_Params.View = System.Windows.Forms.View.Details;
+            // 
+            // col_params
+            // 
+            this.col_params.Text = "Parameters";
+            this.col_params.Width = 419;
             // 
             // BTN_AddParam
             // 
@@ -368,7 +372,7 @@
         private System.Windows.Forms.ComboBox CB_MemberAccess;
         private System.Windows.Forms.RadioButton RB_ReferenceOpt;
         private System.Windows.Forms.RadioButton RB_PointerOpt;
-        private System.Windows.Forms.ListView LV_Params;
+        public  System.Windows.Forms.ListView LV_Params;
         private System.Windows.Forms.ColumnHeader col_params;
         private System.Windows.Forms.Button BTN_RemoveParam;
         private System.Windows.Forms.Button BTN_AddParam;

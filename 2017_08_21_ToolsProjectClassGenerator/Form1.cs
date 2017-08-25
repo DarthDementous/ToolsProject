@@ -150,5 +150,23 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 popupForm.Show();
             }
         }
+
+        private void BTN_RemoveParam_Click(object sender, EventArgs e)
+        {
+            /// No items selected, remove end if there is one
+            if (LV_Params.SelectedItems.Count == 0 && LV_Params.Items.Count != 0)
+            {
+                LV_Params.Items.RemoveAt(LV_Params.Items.Count - 1);
+            }
+
+            /// Item(s) selected, remove them
+            else
+            {
+                foreach (var item in LV_Params.SelectedItems)
+                {
+                    LV_Params.Items.Remove((ListViewItem)(item));
+                }
+            }
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace Utilities
 {
    public class FormUtility
     {
+        public enum eMemType { VAL, PTR, REF };
+
         public Form GetFormByName(string a_name)
         {
             foreach (var form in Application.OpenForms.Cast<Form>())
