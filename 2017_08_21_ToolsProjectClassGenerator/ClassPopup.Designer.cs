@@ -41,10 +41,9 @@
             this.TXT_Class.BackColor = System.Drawing.Color.DarkGray;
             this.TXT_Class.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_Class.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.TXT_Class.Location = new System.Drawing.Point(56, 96);
-            this.TXT_Class.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.TXT_Class.Location = new System.Drawing.Point(28, 50);
             this.TXT_Class.Name = "TXT_Class";
-            this.TXT_Class.Size = new System.Drawing.Size(442, 31);
+            this.TXT_Class.Size = new System.Drawing.Size(222, 20);
             this.TXT_Class.TabIndex = 0;
             this.TXT_Class.Text = "Class Name...";
             // 
@@ -53,10 +52,9 @@
             this.BTN_ClassConfirm.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BTN_ClassConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_ClassConfirm.ForeColor = System.Drawing.Color.OrangeRed;
-            this.BTN_ClassConfirm.Location = new System.Drawing.Point(166, 367);
-            this.BTN_ClassConfirm.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.BTN_ClassConfirm.Location = new System.Drawing.Point(83, 191);
             this.BTN_ClassConfirm.Name = "BTN_ClassConfirm";
-            this.BTN_ClassConfirm.Size = new System.Drawing.Size(238, 85);
+            this.BTN_ClassConfirm.Size = new System.Drawing.Size(119, 44);
             this.BTN_ClassConfirm.TabIndex = 1;
             this.BTN_ClassConfirm.Text = "Generate Class";
             this.BTN_ClassConfirm.UseVisualStyleBackColor = false;
@@ -66,10 +64,9 @@
             // 
             this.CB_VirtualOpt.AutoSize = true;
             this.CB_VirtualOpt.ForeColor = System.Drawing.Color.White;
-            this.CB_VirtualOpt.Location = new System.Drawing.Point(56, 165);
-            this.CB_VirtualOpt.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.CB_VirtualOpt.Location = new System.Drawing.Point(28, 86);
             this.CB_VirtualOpt.Name = "CB_VirtualOpt";
-            this.CB_VirtualOpt.Size = new System.Drawing.Size(210, 29);
+            this.CB_VirtualOpt.Size = new System.Drawing.Size(107, 17);
             this.CB_VirtualOpt.TabIndex = 2;
             this.CB_VirtualOpt.Text = "Virtual Destructor";
             this.CB_VirtualOpt.UseVisualStyleBackColor = true;
@@ -79,10 +76,9 @@
             // 
             this.CB_InheritOpt.AutoSize = true;
             this.CB_InheritOpt.ForeColor = System.Drawing.Color.White;
-            this.CB_InheritOpt.Location = new System.Drawing.Point(56, 210);
-            this.CB_InheritOpt.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.CB_InheritOpt.Location = new System.Drawing.Point(28, 109);
             this.CB_InheritOpt.Name = "CB_InheritOpt";
-            this.CB_InheritOpt.Size = new System.Drawing.Size(218, 29);
+            this.CB_InheritOpt.Size = new System.Drawing.Size(109, 17);
             this.CB_InheritOpt.TabIndex = 3;
             this.CB_InheritOpt.Text = "Inherit From Class";
             this.CB_InheritOpt.UseVisualStyleBackColor = true;
@@ -94,10 +90,9 @@
             this.TXT_BaseClass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_BaseClass.Enabled = false;
             this.TXT_BaseClass.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.TXT_BaseClass.Location = new System.Drawing.Point(284, 275);
-            this.TXT_BaseClass.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.TXT_BaseClass.Location = new System.Drawing.Point(142, 143);
             this.TXT_BaseClass.Name = "TXT_BaseClass";
-            this.TXT_BaseClass.Size = new System.Drawing.Size(214, 31);
+            this.TXT_BaseClass.Size = new System.Drawing.Size(108, 20);
             this.TXT_BaseClass.TabIndex = 4;
             this.TXT_BaseClass.Text = "Base Class Name...";
             // 
@@ -111,18 +106,17 @@
             "PUBLIC",
             "PROTECTED",
             "PRIVATE"});
-            this.CB_Access.Location = new System.Drawing.Point(56, 275);
-            this.CB_Access.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.CB_Access.Location = new System.Drawing.Point(28, 143);
             this.CB_Access.Name = "CB_Access";
-            this.CB_Access.Size = new System.Drawing.Size(210, 33);
+            this.CB_Access.Size = new System.Drawing.Size(107, 21);
             this.CB_Access.TabIndex = 5;
             // 
             // ClassPopup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(568, 504);
+            this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.CB_Access);
             this.Controls.Add(this.TXT_BaseClass);
             this.Controls.Add(this.CB_InheritOpt);
@@ -130,7 +124,6 @@
             this.Controls.Add(this.BTN_ClassConfirm);
             this.Controls.Add(this.TXT_Class);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "ClassPopup";
             this.Text = "class_popup";
             this.TopMost = true;

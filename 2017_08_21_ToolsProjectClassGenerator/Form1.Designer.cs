@@ -45,7 +45,7 @@
             this.CB_MemberAccess = new System.Windows.Forms.ComboBox();
             this.CB_Identifiers = new System.Windows.Forms.ComboBox();
             this.TXT_MemberName = new System.Windows.Forms.TextBox();
-            this.CB_FunctionOpt = new System.Windows.Forms.CheckBox();
+            this.CheckBox_FunctionOpt = new System.Windows.Forms.CheckBox();
             this.TXT_Type = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.GB_FuncOptions = new System.Windows.Forms.GroupBox();
@@ -53,6 +53,9 @@
             this.LV_Params = new System.Windows.Forms.ListView();
             this.col_params = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BTN_AddParam = new System.Windows.Forms.Button();
+            this.BTN_RemoveMember = new System.Windows.Forms.Button();
+            this.BTN_AddMember = new System.Windows.Forms.Button();
+            this.RB_ValueOpt = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SpreadSheet)).BeginInit();
             this.GB_AddMember.SuspendLayout();
             this.GB_FuncOptions.SuspendLayout();
@@ -65,10 +68,9 @@
             this.col_classes});
             this.LV_Classes.ForeColor = System.Drawing.Color.OrangeRed;
             this.LV_Classes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.LV_Classes.Location = new System.Drawing.Point(98, 81);
-            this.LV_Classes.Margin = new System.Windows.Forms.Padding(6);
+            this.LV_Classes.Location = new System.Drawing.Point(49, 42);
             this.LV_Classes.Name = "LV_Classes";
-            this.LV_Classes.Size = new System.Drawing.Size(556, 1046);
+            this.LV_Classes.Size = new System.Drawing.Size(280, 546);
             this.LV_Classes.TabIndex = 0;
             this.LV_Classes.UseCompatibleStateImageBehavior = false;
             this.LV_Classes.View = System.Windows.Forms.View.Details;
@@ -84,10 +86,9 @@
             this.BTN_AddClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_AddClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_AddClass.ForeColor = System.Drawing.Color.OrangeRed;
-            this.BTN_AddClass.Location = new System.Drawing.Point(98, 1152);
-            this.BTN_AddClass.Margin = new System.Windows.Forms.Padding(6);
+            this.BTN_AddClass.Location = new System.Drawing.Point(49, 599);
             this.BTN_AddClass.Name = "BTN_AddClass";
-            this.BTN_AddClass.Size = new System.Drawing.Size(88, 88);
+            this.BTN_AddClass.Size = new System.Drawing.Size(44, 46);
             this.BTN_AddClass.TabIndex = 1;
             this.BTN_AddClass.Text = "+";
             this.BTN_AddClass.UseVisualStyleBackColor = false;
@@ -99,10 +100,9 @@
             this.BTN_RemoveClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_RemoveClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_RemoveClass.ForeColor = System.Drawing.Color.OrangeRed;
-            this.BTN_RemoveClass.Location = new System.Drawing.Point(208, 1152);
-            this.BTN_RemoveClass.Margin = new System.Windows.Forms.Padding(6);
+            this.BTN_RemoveClass.Location = new System.Drawing.Point(104, 599);
             this.BTN_RemoveClass.Name = "BTN_RemoveClass";
-            this.BTN_RemoveClass.Size = new System.Drawing.Size(90, 88);
+            this.BTN_RemoveClass.Size = new System.Drawing.Size(45, 46);
             this.BTN_RemoveClass.TabIndex = 2;
             this.BTN_RemoveClass.Text = "-";
             this.BTN_RemoveClass.UseVisualStyleBackColor = false;
@@ -111,18 +111,16 @@
             // DGV_SpreadSheet
             // 
             this.DGV_SpreadSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_SpreadSheet.Location = new System.Drawing.Point(2058, 147);
-            this.DGV_SpreadSheet.Margin = new System.Windows.Forms.Padding(6);
+            this.DGV_SpreadSheet.Location = new System.Drawing.Point(1029, 76);
             this.DGV_SpreadSheet.Name = "DGV_SpreadSheet";
-            this.DGV_SpreadSheet.Size = new System.Drawing.Size(822, 994);
+            this.DGV_SpreadSheet.Size = new System.Drawing.Size(411, 517);
             this.DGV_SpreadSheet.TabIndex = 4;
             // 
             // BTN_OpenFile
             // 
-            this.BTN_OpenFile.Location = new System.Drawing.Point(2058, 1153);
-            this.BTN_OpenFile.Margin = new System.Windows.Forms.Padding(6);
+            this.BTN_OpenFile.Location = new System.Drawing.Point(1029, 600);
             this.BTN_OpenFile.Name = "BTN_OpenFile";
-            this.BTN_OpenFile.Size = new System.Drawing.Size(150, 44);
+            this.BTN_OpenFile.Size = new System.Drawing.Size(75, 23);
             this.BTN_OpenFile.TabIndex = 5;
             this.BTN_OpenFile.Text = "Open File";
             this.BTN_OpenFile.UseVisualStyleBackColor = true;
@@ -130,10 +128,9 @@
             // 
             // TXT_SheetName
             // 
-            this.TXT_SheetName.Location = new System.Drawing.Point(2254, 1156);
-            this.TXT_SheetName.Margin = new System.Windows.Forms.Padding(6);
+            this.TXT_SheetName.Location = new System.Drawing.Point(1127, 601);
             this.TXT_SheetName.Name = "TXT_SheetName";
-            this.TXT_SheetName.Size = new System.Drawing.Size(196, 31);
+            this.TXT_SheetName.Size = new System.Drawing.Size(100, 20);
             this.TXT_SheetName.TabIndex = 6;
             this.TXT_SheetName.Text = "Sheet Name...";
             // 
@@ -143,9 +140,10 @@
             this.LV_Members.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.col_members});
             this.LV_Members.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.LV_Members.Location = new System.Drawing.Point(751, 118);
+            this.LV_Members.Location = new System.Drawing.Point(376, 61);
+            this.LV_Members.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LV_Members.Name = "LV_Members";
-            this.LV_Members.Size = new System.Drawing.Size(369, 776);
+            this.LV_Members.Size = new System.Drawing.Size(186, 405);
             this.LV_Members.TabIndex = 7;
             this.LV_Members.UseCompatibleStateImageBehavior = false;
             this.LV_Members.View = System.Windows.Forms.View.Details;
@@ -158,18 +156,21 @@
             // GB_AddMember
             // 
             this.GB_AddMember.BackColor = System.Drawing.Color.DimGray;
+            this.GB_AddMember.Controls.Add(this.RB_ValueOpt);
             this.GB_AddMember.Controls.Add(this.RB_ReferenceOpt);
             this.GB_AddMember.Controls.Add(this.RB_PointerOpt);
             this.GB_AddMember.Controls.Add(this.CB_MemberAccess);
             this.GB_AddMember.Controls.Add(this.CB_Identifiers);
             this.GB_AddMember.Controls.Add(this.TXT_MemberName);
-            this.GB_AddMember.Controls.Add(this.CB_FunctionOpt);
+            this.GB_AddMember.Controls.Add(this.CheckBox_FunctionOpt);
             this.GB_AddMember.Controls.Add(this.TXT_Type);
             this.GB_AddMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GB_AddMember.ForeColor = System.Drawing.Color.White;
-            this.GB_AddMember.Location = new System.Drawing.Point(1227, 118);
+            this.GB_AddMember.Location = new System.Drawing.Point(614, 61);
+            this.GB_AddMember.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.GB_AddMember.Name = "GB_AddMember";
-            this.GB_AddMember.Size = new System.Drawing.Size(491, 476);
+            this.GB_AddMember.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GB_AddMember.Size = new System.Drawing.Size(246, 248);
             this.GB_AddMember.TabIndex = 8;
             this.GB_AddMember.TabStop = false;
             this.GB_AddMember.Text = "Add Member";
@@ -178,11 +179,11 @@
             // 
             this.RB_ReferenceOpt.AutoSize = true;
             this.RB_ReferenceOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RB_ReferenceOpt.Location = new System.Drawing.Point(243, 411);
+            this.RB_ReferenceOpt.Location = new System.Drawing.Point(155, 214);
+            this.RB_ReferenceOpt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RB_ReferenceOpt.Name = "RB_ReferenceOpt";
-            this.RB_ReferenceOpt.Size = new System.Drawing.Size(142, 29);
+            this.RB_ReferenceOpt.Size = new System.Drawing.Size(75, 17);
             this.RB_ReferenceOpt.TabIndex = 12;
-            this.RB_ReferenceOpt.TabStop = true;
             this.RB_ReferenceOpt.Text = "Reference";
             this.RB_ReferenceOpt.UseVisualStyleBackColor = true;
             // 
@@ -190,11 +191,11 @@
             // 
             this.RB_PointerOpt.AutoSize = true;
             this.RB_PointerOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RB_PointerOpt.Location = new System.Drawing.Point(34, 411);
+            this.RB_PointerOpt.Location = new System.Drawing.Point(83, 214);
+            this.RB_PointerOpt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RB_PointerOpt.Name = "RB_PointerOpt";
-            this.RB_PointerOpt.Size = new System.Drawing.Size(111, 29);
+            this.RB_PointerOpt.Size = new System.Drawing.Size(58, 17);
             this.RB_PointerOpt.TabIndex = 11;
-            this.RB_PointerOpt.TabStop = true;
             this.RB_PointerOpt.Text = "Pointer";
             this.RB_PointerOpt.UseVisualStyleBackColor = true;
             // 
@@ -205,15 +206,17 @@
             "PUBLIC",
             "PROTECTED",
             "PRIVATE"});
-            this.CB_MemberAccess.Location = new System.Drawing.Point(34, 49);
+            this.CB_MemberAccess.Location = new System.Drawing.Point(17, 25);
+            this.CB_MemberAccess.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CB_MemberAccess.Name = "CB_MemberAccess";
-            this.CB_MemberAccess.Size = new System.Drawing.Size(210, 33);
+            this.CB_MemberAccess.Size = new System.Drawing.Size(107, 21);
             this.CB_MemberAccess.TabIndex = 10;
             // 
             // CB_Identifiers
             // 
             this.CB_Identifiers.FormattingEnabled = true;
             this.CB_Identifiers.Items.AddRange(new object[] {
+            "",
             "CONST",
             "EXPLICIT",
             "EXTERN",
@@ -221,38 +224,42 @@
             "MUTABLE",
             "STATIC",
             "VOLATILE"});
-            this.CB_Identifiers.Location = new System.Drawing.Point(34, 270);
+            this.CB_Identifiers.Location = new System.Drawing.Point(17, 140);
+            this.CB_Identifiers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CB_Identifiers.Name = "CB_Identifiers";
-            this.CB_Identifiers.Size = new System.Drawing.Size(210, 33);
+            this.CB_Identifiers.Size = new System.Drawing.Size(107, 21);
             this.CB_Identifiers.TabIndex = 9;
             // 
             // TXT_MemberName
             // 
             this.TXT_MemberName.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_MemberName.Location = new System.Drawing.Point(34, 198);
+            this.TXT_MemberName.Location = new System.Drawing.Point(17, 103);
+            this.TXT_MemberName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TXT_MemberName.Name = "TXT_MemberName";
-            this.TXT_MemberName.Size = new System.Drawing.Size(210, 31);
+            this.TXT_MemberName.Size = new System.Drawing.Size(107, 19);
             this.TXT_MemberName.TabIndex = 2;
             this.TXT_MemberName.Text = "Name...";
             // 
-            // CB_FunctionOpt
+            // CheckBox_FunctionOpt
             // 
-            this.CB_FunctionOpt.AutoSize = true;
-            this.CB_FunctionOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CB_FunctionOpt.Location = new System.Drawing.Point(34, 348);
-            this.CB_FunctionOpt.Name = "CB_FunctionOpt";
-            this.CB_FunctionOpt.Size = new System.Drawing.Size(167, 29);
-            this.CB_FunctionOpt.TabIndex = 1;
-            this.CB_FunctionOpt.Text = "Is a Function";
-            this.CB_FunctionOpt.UseVisualStyleBackColor = true;
-            this.CB_FunctionOpt.CheckedChanged += new System.EventHandler(this.CB_FunctionOpt_CheckedChanged);
+            this.CheckBox_FunctionOpt.AutoSize = true;
+            this.CheckBox_FunctionOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckBox_FunctionOpt.Location = new System.Drawing.Point(17, 181);
+            this.CheckBox_FunctionOpt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CheckBox_FunctionOpt.Name = "CheckBox_FunctionOpt";
+            this.CheckBox_FunctionOpt.Size = new System.Drawing.Size(87, 17);
+            this.CheckBox_FunctionOpt.TabIndex = 1;
+            this.CheckBox_FunctionOpt.Text = "Is a Function";
+            this.CheckBox_FunctionOpt.UseVisualStyleBackColor = true;
+            this.CheckBox_FunctionOpt.CheckedChanged += new System.EventHandler(this.CB_FunctionOpt_CheckedChanged);
             // 
             // TXT_Type
             // 
             this.TXT_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TXT_Type.Location = new System.Drawing.Point(34, 127);
+            this.TXT_Type.Location = new System.Drawing.Point(17, 66);
+            this.TXT_Type.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TXT_Type.Name = "TXT_Type";
-            this.TXT_Type.Size = new System.Drawing.Size(210, 31);
+            this.TXT_Type.Size = new System.Drawing.Size(107, 19);
             this.TXT_Type.TabIndex = 0;
             this.TXT_Type.Text = "Type...";
             // 
@@ -264,9 +271,11 @@
             this.GB_FuncOptions.Enabled = false;
             this.GB_FuncOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GB_FuncOptions.ForeColor = System.Drawing.Color.White;
-            this.GB_FuncOptions.Location = new System.Drawing.Point(1227, 671);
+            this.GB_FuncOptions.Location = new System.Drawing.Point(614, 349);
+            this.GB_FuncOptions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.GB_FuncOptions.Name = "GB_FuncOptions";
-            this.GB_FuncOptions.Size = new System.Drawing.Size(490, 409);
+            this.GB_FuncOptions.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GB_FuncOptions.Size = new System.Drawing.Size(245, 213);
             this.GB_FuncOptions.TabIndex = 3;
             this.GB_FuncOptions.TabStop = false;
             this.GB_FuncOptions.Text = "Function Options";
@@ -278,10 +287,9 @@
             this.BTN_RemoveParam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_RemoveParam.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_RemoveParam.ForeColor = System.Drawing.Color.OrangeRed;
-            this.BTN_RemoveParam.Location = new System.Drawing.Point(144, 293);
-            this.BTN_RemoveParam.Margin = new System.Windows.Forms.Padding(6);
+            this.BTN_RemoveParam.Location = new System.Drawing.Point(72, 152);
             this.BTN_RemoveParam.Name = "BTN_RemoveParam";
-            this.BTN_RemoveParam.Size = new System.Drawing.Size(90, 88);
+            this.BTN_RemoveParam.Size = new System.Drawing.Size(45, 46);
             this.BTN_RemoveParam.TabIndex = 10;
             this.BTN_RemoveParam.Text = "-";
             this.BTN_RemoveParam.UseVisualStyleBackColor = false;
@@ -294,9 +302,10 @@
             this.col_params});
             this.LV_Params.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LV_Params.ForeColor = System.Drawing.Color.MediumBlue;
-            this.LV_Params.Location = new System.Drawing.Point(34, 41);
+            this.LV_Params.Location = new System.Drawing.Point(17, 21);
+            this.LV_Params.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LV_Params.Name = "LV_Params";
-            this.LV_Params.Size = new System.Drawing.Size(422, 228);
+            this.LV_Params.Size = new System.Drawing.Size(213, 120);
             this.LV_Params.TabIndex = 9;
             this.LV_Params.UseCompatibleStateImageBehavior = false;
             this.LV_Params.View = System.Windows.Forms.View.Details;
@@ -312,22 +321,65 @@
             this.BTN_AddParam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_AddParam.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTN_AddParam.ForeColor = System.Drawing.Color.OrangeRed;
-            this.BTN_AddParam.Location = new System.Drawing.Point(34, 293);
-            this.BTN_AddParam.Margin = new System.Windows.Forms.Padding(6);
+            this.BTN_AddParam.Location = new System.Drawing.Point(17, 152);
             this.BTN_AddParam.Name = "BTN_AddParam";
-            this.BTN_AddParam.Size = new System.Drawing.Size(88, 88);
+            this.BTN_AddParam.Size = new System.Drawing.Size(44, 46);
             this.BTN_AddParam.TabIndex = 9;
             this.BTN_AddParam.Text = "+";
             this.BTN_AddParam.UseVisualStyleBackColor = false;
             this.BTN_AddParam.Click += new System.EventHandler(this.BTN_AddParam_Click);
             // 
+            // BTN_RemoveMember
+            // 
+            this.BTN_RemoveMember.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BTN_RemoveMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_RemoveMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_RemoveMember.ForeColor = System.Drawing.Color.OrangeRed;
+            this.BTN_RemoveMember.Location = new System.Drawing.Point(431, 478);
+            this.BTN_RemoveMember.Name = "BTN_RemoveMember";
+            this.BTN_RemoveMember.Size = new System.Drawing.Size(45, 46);
+            this.BTN_RemoveMember.TabIndex = 12;
+            this.BTN_RemoveMember.Text = "-";
+            this.BTN_RemoveMember.UseVisualStyleBackColor = false;
+            this.BTN_RemoveMember.Click += new System.EventHandler(this.BTN_RemoveMember_Click);
+            // 
+            // BTN_AddMember
+            // 
+            this.BTN_AddMember.BackColor = System.Drawing.Color.Black;
+            this.BTN_AddMember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_AddMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_AddMember.ForeColor = System.Drawing.Color.OrangeRed;
+            this.BTN_AddMember.Location = new System.Drawing.Point(376, 478);
+            this.BTN_AddMember.Name = "BTN_AddMember";
+            this.BTN_AddMember.Size = new System.Drawing.Size(44, 46);
+            this.BTN_AddMember.TabIndex = 11;
+            this.BTN_AddMember.Text = "+";
+            this.BTN_AddMember.UseVisualStyleBackColor = false;
+            this.BTN_AddMember.Click += new System.EventHandler(this.BTN_AddMember_Click);
+            // 
+            // RB_ValueOpt
+            // 
+            this.RB_ValueOpt.AutoSize = true;
+            this.RB_ValueOpt.Checked = true;
+            this.RB_ValueOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RB_ValueOpt.Location = new System.Drawing.Point(17, 214);
+            this.RB_ValueOpt.Margin = new System.Windows.Forms.Padding(2);
+            this.RB_ValueOpt.Name = "RB_ValueOpt";
+            this.RB_ValueOpt.Size = new System.Drawing.Size(52, 17);
+            this.RB_ValueOpt.TabIndex = 13;
+            this.RB_ValueOpt.TabStop = true;
+            this.RB_ValueOpt.Text = "Value";
+            this.RB_ValueOpt.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
-            this.ClientSize = new System.Drawing.Size(2528, 1312);
+            this.ClientSize = new System.Drawing.Size(1479, 699);
+            this.Controls.Add(this.BTN_RemoveMember);
             this.Controls.Add(this.GB_FuncOptions);
+            this.Controls.Add(this.BTN_AddMember);
             this.Controls.Add(this.GB_AddMember);
             this.Controls.Add(this.LV_Members);
             this.Controls.Add(this.TXT_SheetName);
@@ -337,7 +389,6 @@
             this.Controls.Add(this.BTN_AddClass);
             this.Controls.Add(this.LV_Classes);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = " ";
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SpreadSheet)).EndInit();
@@ -365,7 +416,7 @@
         private System.Windows.Forms.GroupBox GB_AddMember;
         private System.Windows.Forms.ComboBox CB_Identifiers;
         private System.Windows.Forms.TextBox TXT_MemberName;
-        private System.Windows.Forms.CheckBox CB_FunctionOpt;
+        private System.Windows.Forms.CheckBox CheckBox_FunctionOpt;
         private System.Windows.Forms.TextBox TXT_Type;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox GB_FuncOptions;
@@ -376,6 +427,9 @@
         private System.Windows.Forms.ColumnHeader col_params;
         private System.Windows.Forms.Button BTN_RemoveParam;
         private System.Windows.Forms.Button BTN_AddParam;
+        private System.Windows.Forms.Button BTN_RemoveMember;
+        private System.Windows.Forms.Button BTN_AddMember;
+        private System.Windows.Forms.RadioButton RB_ValueOpt;
     }
 }
 

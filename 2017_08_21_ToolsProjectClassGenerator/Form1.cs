@@ -15,6 +15,9 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 {
     public partial class Form1 : Form
     {
+        string  textBuffer;
+        char SPACE = ' ';
+
         public Form1()
         {
             InitializeComponent();
@@ -23,10 +26,35 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
         private void InitialiseObjects()
         {
-
+            // Starting group box selections
+            CB_MemberAccess.SelectedIndex = 0;
+            CB_Identifiers.SelectedIndex = 0;
         }
 
         public FormUtility formUtil = new FormUtility();
+
+        /**
+         * @brief Based on context of selection, remove desired items and set selection to bottom one.
+         * @param a_lv is the ListView containing the items.
+         * @return void
+         * */
+        private void RemoveItems(ListView a_lv)
+        {
+            /// No items selected, remove end if there is one
+            if (a_lv.SelectedItems.Count == 0 && a_lv.Items.Count != 0)
+            {
+                a_lv.Items.RemoveAt(a_lv.Items.Count - 1);
+            }
+
+            /// Item(s) selected, remove them
+            else
+            {
+                foreach (var item in a_lv.SelectedItems)
+                {
+                    a_lv.Items.Remove((ListViewItem)(item));
+                }
+            }
+        }
 
         private void BTN_AddClass_Click(object sender, EventArgs e)
         {
@@ -44,20 +72,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
         private void BTN_RemoveClass_Click(object sender, EventArgs e)
         {
-            /// No items selected, remove end if there is one
-            if (LV_Classes.SelectedItems.Count == 0 && LV_Classes.Items.Count != 0)
-            {
-                LV_Classes.Items.RemoveAt(LV_Classes.Items.Count - 1);
-            }
-
-            /// Item(s) selected, remove them
-            else
-            {
-                foreach (var item in LV_Classes.SelectedItems)
-                {
-                    LV_Classes.Items.Remove((ListViewItem)(item));
-                }
-            }
+            RemoveItems(LV_Classes);
         }
 
         //private void BTN_LoadFile_Click(object sender, EventArgs e)
@@ -153,20 +168,35 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
         private void BTN_RemoveParam_Click(object sender, EventArgs e)
         {
-            /// No items selected, remove end if there is one
-            if (LV_Params.SelectedItems.Count == 0 && LV_Params.Items.Count != 0)
+            RemoveItems(LV_Params);
+        }
+
+        private void BTN_AddMember_Click(object sender, EventArgs e)
+        {
+            // Determine whether to add braces to string
+            string funcBraces = (CheckBox_FunctionOpt.Checked) ? "()" : "";
+
+            // Determine representation of return type/member type
+            string memType = "";
+
+            if (RB_PointerOpt.Checked)
             {
-                LV_Params.Items.RemoveAt(LV_Params.Items.Count - 1);
+                memType = "*";
+            }
+            else if (RB_ReferenceOpt.Checked)
+            {
+                memType = "&";
             }
 
-            /// Item(s) selected, remove them
-            else
-            {
-                foreach (var item in LV_Params.SelectedItems)
-                {
-                    LV_Params.Items.Remove((ListViewItem)(item));
-                }
-            }
+            // e.g. PRIVATE INLINE int& bagels
+            textBuffer = CB_MemberAccess.SelectedItem.ToString() + SPACE + CB_Identifiers.SelectedItem.ToString() + SPACE + TXT_Type.Text + SPACE + memType + SPACE + TXT_MemberName.Text + funcBraces;
+
+            LV_Members.Items.Add(textBuffer);
+        }
+
+        private void BTN_RemoveMember_Click(object sender, EventArgs e)
+        {
+            RemoveItems(LV_Members);
         }
     }
 }
