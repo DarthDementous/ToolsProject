@@ -15,46 +15,12 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 {
     public partial class Form1 : Form
     {
-        string  textBuffer;
-        char SPACE = ' ';
-
         public Form1()
         {
             InitializeComponent();
-            InitialiseObjects();
-        }
-
-        private void InitialiseObjects()
-        {
-            // Starting group box selections
-            CB_MemberAccess.SelectedIndex = 0;
-            CB_Identifiers.SelectedIndex = 0;
         }
 
         public FormUtility formUtil = new FormUtility();
-
-        /**
-         * @brief Based on context of selection, remove desired items and set selection to bottom one.
-         * @param a_lv is the ListView containing the items.
-         * @return void
-         * */
-        private void RemoveItems(ListView a_lv)
-        {
-            /// No items selected, remove end if there is one
-            if (a_lv.SelectedItems.Count == 0 && a_lv.Items.Count != 0)
-            {
-                a_lv.Items.RemoveAt(a_lv.Items.Count - 1);
-            }
-
-            /// Item(s) selected, remove them
-            else
-            {
-                foreach (var item in a_lv.SelectedItems)
-                {
-                    a_lv.Items.Remove((ListViewItem)(item));
-                }
-            }
-        }
 
         private void BTN_AddClass_Click(object sender, EventArgs e)
         {
@@ -64,7 +30,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             if (popup == null)
             {
                 // Create new instance of pop up form and display
-                var popupForm = new ClassPopup(this);
+                var popupForm = new ClassPopup();
                 popupForm.Show();
             }
 
@@ -72,7 +38,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
         private void BTN_RemoveClass_Click(object sender, EventArgs e)
         {
-            RemoveItems(LV_Classes);
+            formUtil.RemoveItems(LV_Classes);
         }
 
         //private void BTN_LoadFile_Click(object sender, EventArgs e)
@@ -144,59 +110,6 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             {
                 MessageBox.Show("!?!?!??!?!");
             }
-        }
-
-        private void CB_FunctionOpt_CheckedChanged(object sender, EventArgs e)
-        {
-            // Flip active status of function options
-            GB_FuncOptions.Enabled = !GB_FuncOptions.Enabled;
-            GB_FuncOptions.Visible = !GB_FuncOptions.Visible;
-        }
-
-        private void BTN_AddParam_Click(object sender, EventArgs e)
-        {
-            var popup = formUtil.GetFormByName("ParamPopup");
-
-            // Only load pop up if it hasn't been loaded before
-            if (popup == null)
-            {
-                // Create new instance of pop up form and display
-                var popupForm = new ParamPopup(this);
-                popupForm.Show();
-            }
-        }
-
-        private void BTN_RemoveParam_Click(object sender, EventArgs e)
-        {
-            RemoveItems(LV_Params);
-        }
-
-        private void BTN_AddMember_Click(object sender, EventArgs e)
-        {
-            // Determine whether to add braces to string
-            string funcBraces = (CheckBox_FunctionOpt.Checked) ? "()" : "";
-
-            // Determine representation of return type/member type
-            string memType = "";
-
-            if (RB_PointerOpt.Checked)
-            {
-                memType = "*";
-            }
-            else if (RB_ReferenceOpt.Checked)
-            {
-                memType = "&";
-            }
-
-            // e.g. PRIVATE INLINE int& bagels
-            textBuffer = CB_MemberAccess.SelectedItem.ToString() + SPACE + CB_Identifiers.SelectedItem.ToString() + SPACE + TXT_Type.Text + SPACE + memType + SPACE + TXT_MemberName.Text + funcBraces;
-
-            LV_Members.Items.Add(textBuffer);
-        }
-
-        private void BTN_RemoveMember_Click(object sender, EventArgs e)
-        {
-            RemoveItems(LV_Members);
         }
     }
 }

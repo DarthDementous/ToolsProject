@@ -58,6 +58,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberPopup.Designer.cs">
+      <DependentUpon>MemberPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="ParamPopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberPopup.resx">
+      <DependentUpon>MemberPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ParamPopup.resx">
       <DependentUpon>ParamPopup.cs</DependentUpon>
