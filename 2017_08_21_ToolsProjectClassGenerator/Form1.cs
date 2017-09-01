@@ -20,7 +20,44 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             InitializeComponent();
         }
 
-        public FormUtility formUtil = new FormUtility();
+        public List<CppClass>   classes     = new List<CppClass>();     /*Keep track of all generated classes.*/
+        public FormUtility      formUtil    = new FormUtility();
+
+        /**
+         * @brief Based on class strings in list view, update class data list accordingly.
+         * NOTE: Call everytime the listview is modified. 
+         * @return void.
+         * */
+        public void UpdateClasses()
+        {
+            // Refresh data
+            classes.Clear();
+
+            // Convert strings to classes and add to list
+            foreach (ListViewItem classRep in LV_Classes.Items)
+            {
+                classes.Add(formUtil.StringToClass(classRep.Text));
+            }
+        }
+
+        /**
+         * @brief Update current selected classes' list of members based on listview.
+         * NOTE: Call everytime the listview is modified.
+         * @param a_selectClass is the class to update.
+         * @return void.
+         * */
+         public void UpdateClassMembers(CppClass a_selectClass)
+        {
+            // Refresh data
+            a_selectClass.members.Clear();
+
+            // Convert strings to members and add to list
+            foreach (ListViewItem memberRep in LV_Members.Items)
+            {
+                a_selectClass.members.Add(formUtil.StringToMember(memberRep.Text));
+            }
+            
+        }
 
         private void BTN_AddClass_Click(object sender, EventArgs e)
         {
@@ -39,6 +76,8 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         private void BTN_RemoveClass_Click(object sender, EventArgs e)
         {
             formUtil.RemoveItems(LV_Classes);
+
+            UpdateClasses();
         }
 
         //private void BTN_LoadFile_Click(object sender, EventArgs e)
@@ -109,6 +148,37 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             catch
             {
                 MessageBox.Show("!?!?!??!?!");
+            }
+        }
+
+        private void BTN_AddMember_Click(object sender, EventArgs e)
+        {
+            var popup = formUtil.GetFormByName("MemberPopup");
+
+            // Only load pop up if it hasn't been loaded before
+            if (popup == null)
+            {
+                // Create new instance of pop up form and display
+                var popupForm = new MemberPopup();
+                popupForm.Show();
+            }
+        }
+
+        private void BTN_RemoveMember_Click(object sender, EventArgs e)
+        {
+            formUtil.RemoveItems(LV_Members);
+        }
+
+        // Item click event
+        private void LV_Classes_DoubleClick(object sender, EventArgs e)
+        {
+            // Refresh items
+            LV_Members.Items.Clear();
+
+            // Populate member's list with focused class's members
+            foreach (var member in classes[LV_Classes.SelectedIndices[0]].members)
+            {
+                LV_Members.Items.Add(member.ToString());
             }
         }
     }

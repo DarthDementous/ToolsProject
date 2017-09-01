@@ -16,6 +16,9 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         private string  textBuffer;
         private char    SPACE = ' ';
 
+        private bool isVirtual  = false;
+        private bool isFunc     = false;
+
         FormUtility formUtil = new FormUtility();
         public MemberPopup()
         {
@@ -38,10 +41,17 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             GB_FuncOptions.Visible = !GB_FuncOptions.Visible;
         }
 
-        private void BTN_AddMember_Click(object sender, EventArgs e)
+        protected override bool GenerateFunction()
         {
-            // Determine whether to add braces to string
-            string funcBraces = (CheckBox_FunctionOpt.Checked) ? "()" : "";
+            // Quit out early with failure if no class or sub-class name (if inheriting)
+            if (TXT_Type.Text == "" || TXT_MemberName.Text == "")
+            {
+                return false;
+            }
+
+            // Determine optional paramter representation
+            string virtOpt = (isVirtual) ? "VIRTUAL" : "";
+            string funcBraces = (isFunc) ? "()" : "";
 
             // Determine representation of return type/member type
             string memType = "";
@@ -56,14 +66,19 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             }
 
             // e.g. PRIVATE INLINE int& bagels
-            textBuffer = CB_MemberAccess.SelectedItem.ToString() + SPACE + CB_Identifiers.SelectedItem.ToString() + SPACE + TXT_Type.Text + SPACE + memType + SPACE + TXT_MemberName.Text + funcBraces;
+            textBuffer = CB_MemberAccess.SelectedItem.ToString() + SPACE + virtOpt + SPACE + CB_Identifiers.SelectedItem.ToString() + SPACE
+                + TXT_Type.Text + memType + SPACE + TXT_MemberName.Text + funcBraces;
+
+            formUtil.StringToMember(textBuffer);
 
             m_mainForm.LV_Members.Items.Add(textBuffer);
+
+            return true;
         }
 
         private void BTN_RemoveMember_Click(object sender, EventArgs e)
         {
-            formUtil.RemoveItems(((Form1)m_mainForm).LV_Members);
+            formUtil.RemoveItems(m_mainForm.LV_Members);
         }
 
         private void BTN_AddParam_Click(object sender, EventArgs e)
@@ -82,6 +97,32 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         private void BTN_RemoveParam_Click(object sender, EventArgs e)
         {
             formUtil.RemoveItems(LV_Params);
+        }
+
+        private void CB_VirtualOpt_CheckedChanged(object sender, EventArgs e)
+        {
+            isVirtual = !isVirtual;
+        }
+
+        private void CheckBox_FunctionOpt_CheckedChanged(object sender, EventArgs e)
+        {
+            GB_FuncOptions.Enabled = !GB_FuncOptions.Enabled;
+            GB_FuncOptions.Visible = !GB_FuncOptions.Visible;
+
+            isFunc = !isFunc;
+        }
+
+        private void BTN_MemberConfirm_Click(object sender, EventArgs e)
+        {
+            // Assess success of class creation and provide feedback.
+            if (GenerateFunction())
+            {
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Not all text fields were filled out.");
+            }
         }
     }
 }

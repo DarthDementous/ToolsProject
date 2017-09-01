@@ -55,8 +55,11 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             // Convert class options into string
             textBuffer = virtOpt + space + TXT_Class.Text + space + inheritOpt;
 
-            // Add class to list
+            // Add class representation
             m_mainForm.LV_Classes.Items.Add(textBuffer);
+
+            // Update class data
+            m_mainForm.UpdateClasses();
 
             return true;
         }
