@@ -41,7 +41,7 @@
             this.LBL_Access = new System.Windows.Forms.Label();
             this.LBL_Identifier = new System.Windows.Forms.Label();
             this.GB_FuncOptions = new System.Windows.Forms.GroupBox();
-            this.CB_VirtualOpt = new System.Windows.Forms.CheckBox();
+            this.CheckBox_VirtualOpt = new System.Windows.Forms.CheckBox();
             this.BTN_RemoveParam = new System.Windows.Forms.Button();
             this.LV_Params = new System.Windows.Forms.ListView();
             this.col_params = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -204,7 +204,7 @@
             // 
             // GB_FuncOptions
             // 
-            this.GB_FuncOptions.Controls.Add(this.CB_VirtualOpt);
+            this.GB_FuncOptions.Controls.Add(this.CheckBox_VirtualOpt);
             this.GB_FuncOptions.Controls.Add(this.BTN_RemoveParam);
             this.GB_FuncOptions.Controls.Add(this.LV_Params);
             this.GB_FuncOptions.Controls.Add(this.BTN_AddParam);
@@ -221,19 +221,19 @@
             this.GB_FuncOptions.Text = "Function Options";
             this.GB_FuncOptions.Visible = false;
             // 
-            // CB_VirtualOpt
+            // CheckBox_VirtualOpt
             // 
-            this.CB_VirtualOpt.AutoSize = true;
-            this.CB_VirtualOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CB_VirtualOpt.ForeColor = System.Drawing.SystemColors.Control;
-            this.CB_VirtualOpt.Location = new System.Drawing.Point(23, 33);
-            this.CB_VirtualOpt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CB_VirtualOpt.Name = "CB_VirtualOpt";
-            this.CB_VirtualOpt.Size = new System.Drawing.Size(84, 21);
-            this.CB_VirtualOpt.TabIndex = 27;
-            this.CB_VirtualOpt.Text = "Is Virtual";
-            this.CB_VirtualOpt.UseVisualStyleBackColor = true;
-            this.CB_VirtualOpt.CheckedChanged += new System.EventHandler(this.CB_VirtualOpt_CheckedChanged);
+            this.CheckBox_VirtualOpt.AutoSize = true;
+            this.CheckBox_VirtualOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckBox_VirtualOpt.ForeColor = System.Drawing.SystemColors.Control;
+            this.CheckBox_VirtualOpt.Location = new System.Drawing.Point(23, 33);
+            this.CheckBox_VirtualOpt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CheckBox_VirtualOpt.Name = "CheckBox_VirtualOpt";
+            this.CheckBox_VirtualOpt.Size = new System.Drawing.Size(84, 21);
+            this.CheckBox_VirtualOpt.TabIndex = 27;
+            this.CheckBox_VirtualOpt.Text = "Is Virtual";
+            this.CheckBox_VirtualOpt.UseVisualStyleBackColor = true;
+            this.CheckBox_VirtualOpt.CheckedChanged += new System.EventHandler(this.CB_VirtualOpt_CheckedChanged);
             // 
             // BTN_RemoveParam
             // 
@@ -346,7 +346,7 @@
         public System.Windows.Forms.ListView LV_Params;
         private System.Windows.Forms.ColumnHeader col_params;
         private System.Windows.Forms.Button BTN_AddParam;
-        private System.Windows.Forms.CheckBox CB_VirtualOpt;
+        private System.Windows.Forms.CheckBox CheckBox_VirtualOpt;
         private System.Windows.Forms.Button BTN_MemberConfirm;
     }
 }

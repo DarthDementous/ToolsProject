@@ -13,6 +13,8 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 {
     public partial class MemberPopup : PopupForm
     {
+        public bool     editMode = false;  /*TRUE = form has been opened to edit existing member, FALSE = form has been opened to add new member*/
+
         private string  textBuffer;
         private char    SPACE = ' ';
 
@@ -20,11 +22,64 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         private bool isFunc     = false;
 
         FormUtility formUtil = new FormUtility();
+
         public MemberPopup()
         {
             InitialiseMainForm();
             InitializeComponent();
             InitialiseObjects();
+        }
+
+        /**
+        * @brief Load data from member into the form details.
+        * @param a_member is the member to extract data from.
+        * @param a_editMode is whether member is being modified or added.
+        * @return void.
+        * */
+        public void Populate(CppMember a_member, bool a_editMode)
+        {
+            editMode = a_editMode;
+
+            CB_MemberAccess.SelectedItem    = a_member.access;
+            CB_Identifiers.SelectedItem     = a_member.modifier;
+             
+            TXT_MemberName.Text             = a_member.name;
+            TXT_Type.Text                   = a_member.type;
+
+            // Memory type
+            if (a_member.memType == "*")
+            {
+                RB_PointerOpt.Checked = true;
+            }
+            else if (a_member.memType == "&")
+            {
+                RB_ReferenceOpt.Checked = true;
+            }
+            else
+            {
+                RB_ValueOpt.Checked = true;
+            }
+
+            // Virtual
+            if (a_member.isVirtual)
+            {
+                CheckBox_VirtualOpt.Checked = true;
+                isVirtual = true;
+            }
+
+            // Function
+            if (a_member.isFunction)
+            {
+                CheckBox_FunctionOpt.Checked = true;
+                isFunc = true;
+            }
+
+            // Change button text to reflect the mode of the form
+            if (editMode)
+            {
+                BTN_MemberConfirm.Text = "Confirm Changes";
+            }
+
         }
 
         private void InitialiseObjects()
@@ -69,16 +124,20 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             textBuffer = CB_MemberAccess.SelectedItem.ToString() + SPACE + virtOpt + SPACE + CB_Identifiers.SelectedItem.ToString() + SPACE
                 + TXT_Type.Text + memType + SPACE + TXT_MemberName.Text + funcBraces;
 
-            formUtil.StringToMember(textBuffer);
+            // Modify current selected member or add new one depending on form mode
+            if (editMode)
+            {
+                m_mainForm.LV_Members.Items[m_mainForm.selectedMemberIndex].Text = textBuffer;
+            }
+            else
+            {
+                m_mainForm.LV_Members.Items.Add(textBuffer);
+            }
 
-            m_mainForm.LV_Members.Items.Add(textBuffer);
+            // Re-add members based on modifications to list
+            m_mainForm.UpdateClassMembers(m_mainForm.selectedClass);
 
             return true;
-        }
-
-        private void BTN_RemoveMember_Click(object sender, EventArgs e)
-        {
-            formUtil.RemoveItems(m_mainForm.LV_Members);
         }
 
         private void BTN_AddParam_Click(object sender, EventArgs e)

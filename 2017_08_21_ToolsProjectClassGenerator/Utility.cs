@@ -15,21 +15,21 @@ namespace Utilities
         // AccessLevel, Modifier, Type, Name, MemoryType 
         public CppMember(string a_access, string a_mod, string a_type, string a_name, string a_mem, bool a_isVirt = false, bool a_isFunc = false)
         {
-            m_type = a_type;
-            m_name = a_name;
+            type = a_type;
+            name = a_name;
 
-            m_access     = a_access;
-            m_modifier   = a_mod;
-            m_memType    = a_mem;
+            access     = a_access;
+            modifier   = a_mod;
+            memType    = a_mem;
 
-            m_isVirtual  = a_isVirt;
-            m_isFunction = a_isFunc;
+            isVirtual  = a_isVirt;
+            isFunction = a_isFunc;
         }
 
         public override string ToString()
         {
             // Determine whether to add braces to string
-            string funcBraces = (m_isFunction) ? "()" : "";
+            string funcBraces = (isFunction) ? "()" : "";
 
             // Determine representation of return type/member type
             string memType = "";
@@ -44,19 +44,19 @@ namespace Utilities
             }
 
             // Return string representation of member
-            return m_access + ' ' + m_modifier + ' ' + m_type + ' ' + m_memType + ' ' + m_name + funcBraces;
+            return access + ' ' + modifier + ' ' + type + ' ' + memType + ' ' + name + funcBraces;
 
         }
 
-        string m_name;
-        string m_type;
+        public string name;
+        public string type;
 
-        bool m_isVirtual;    /*FUNCTIONS ONLY: Whether member is to be overridden.*/
-        bool m_isFunction;   /*Whether to treat member like a function.*/
+        public bool isVirtual;    /*FUNCTIONS ONLY: Whether member is to be overridden.*/
+        public bool isFunction;   /*Whether to treat member like a function.*/
 
-        string m_access;       /*Level of access (PUBLIC, PROTECTED, PRIVATE)*/
-        string m_modifier;     /*Member modifiers e.g. const, static etc.*/
-        string m_memType;      /*Type of memory (VAl, PTR, REF)*/
+        public string access;       /*Level of access (PUBLIC, PROTECTED, PRIVATE)*/
+        public string modifier;     /*Member modifiers e.g. const, static etc.*/
+        public string memType;      /*Type of memory (VAl, PTR, REF)*/
 
         public List<CppMember> args = new List<CppMember>(); /*List of parameters if member is a function.*/
     }

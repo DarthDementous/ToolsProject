@@ -23,6 +23,9 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         public List<CppClass>   classes     = new List<CppClass>();     /*Keep track of all generated classes.*/
         public FormUtility      formUtil    = new FormUtility();
 
+        public CppClass         selectedClass;                          /*Selection indices reset, keep track of focused class.*/
+        public int              selectedMemberIndex;                    /*Hold onto index of selected member in case selection indices reset.*/
+
         /**
          * @brief Based on class strings in list view, update class data list accordingly.
          * NOTE: Call everytime the listview is modified. 
@@ -31,7 +34,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         public void UpdateClasses()
         {
             // Refresh data
-            classes.Clear();
+            classes.Clear();                        /// TODO: Find a better way to refresh classes without deleting class member data
 
             // Convert strings to classes and add to list
             foreach (ListViewItem classRep in LV_Classes.Items)
@@ -167,18 +170,47 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         private void BTN_RemoveMember_Click(object sender, EventArgs e)
         {
             formUtil.RemoveItems(LV_Members);
+
+            // Remove members based on modification to list
+            UpdateClassMembers(selectedClass);
         }
 
-        // Item click event
+        /// Class item click event
         private void LV_Classes_DoubleClick(object sender, EventArgs e)
         {
             // Refresh items
             LV_Members.Items.Clear();
 
+            // Set new focused class
+            selectedClass = classes[LV_Classes.SelectedIndices[0]];
+
             // Populate member's list with focused class's members
-            foreach (var member in classes[LV_Classes.SelectedIndices[0]].members)
+            foreach (var member in selectedClass.members)
             {
                 LV_Members.Items.Add(member.ToString());
+            }
+
+            // Display member panel (if not displaying already)
+            PNL_Members.Visible = true;
+        }
+
+        /// Member item click event
+        private void LV_Members_DoubleClick(object sender, EventArgs e)
+        {
+            // Set new focused member index
+            selectedMemberIndex = LV_Members.SelectedIndices[0];
+
+            // Display popup for editing member details
+            var popup = formUtil.GetFormByName("ClassPopup");
+
+            if (popup == null)
+            {
+                // Create new instance of pop up form and display
+                var popupForm = new MemberPopup();
+                popupForm.Show();
+
+                // Load data from selected member
+                popupForm.Populate(selectedClass.members[selectedMemberIndex], true);
             }
         }
     }
