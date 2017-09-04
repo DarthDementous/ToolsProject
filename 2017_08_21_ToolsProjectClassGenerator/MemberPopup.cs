@@ -134,8 +134,8 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 m_mainForm.LV_Members.Items.Add(textBuffer);
             }
 
-            // Re-add members based on modifications to list
-            m_mainForm.UpdateClassMembers(m_mainForm.selectedClass);
+            // Add members based on modifications to list
+            m_mainForm.selectedClass.members.Add(formUtil.StringToMember(textBuffer));
 
             return true;
         }

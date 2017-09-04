@@ -59,7 +59,8 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             // Generate string to represent parameter and add to list
             textBuffer = constant + SPACE + type + SPACE + TXT_ParamName.Text;
 
-            //LV_Params.Items.Add(textBuffer);
+            // Add actual parameter to selected member
+            m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args.Add(formUtil.StringToMember(textBuffer));
 
             return true;
         }

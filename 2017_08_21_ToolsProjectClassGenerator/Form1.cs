@@ -26,22 +26,22 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         public CppClass         selectedClass;                          /*Selection indices reset, keep track of focused class.*/
         public int              selectedMemberIndex;                    /*Hold onto index of selected member in case selection indices reset.*/
 
-        /**
-         * @brief Based on class strings in list view, update class data list accordingly.
-         * NOTE: Call everytime the listview is modified. 
-         * @return void.
-         * */
-        public void UpdateClasses()
-        {
-            // Refresh data
-            classes.Clear();                        /// TODO: Find a better way to refresh classes without deleting class member data
+        ///**
+        // * @brief Based on class strings in list view, update class data list accordingly.
+        // * NOTE: Call everytime the listview is modified. 
+        // * @return void.
+        // * */
+        //public void UpdateClasses()
+        //{
+        //    // Refresh data
+        //    classes.Clear();                        /// TODO: Find a better way to refresh classes without deleting class member data
 
-            // Convert strings to classes and add to list
-            foreach (ListViewItem classRep in LV_Classes.Items)
-            {
-                classes.Add(formUtil.StringToClass(classRep.Text));
-            }
-        }
+        //    // Convert strings to classes and add to list
+        //    foreach (ListViewItem classRep in LV_Classes.Items)
+        //    {
+        //        classes.Add(formUtil.StringToClass(classRep.Text));
+        //    }
+        //}
 
         /**
          * @brief Update current selected classes' list of members based on listview.
@@ -49,18 +49,18 @@ namespace _2017_08_21_ToolsProjectClassGenerator
          * @param a_selectClass is the class to update.
          * @return void.
          * */
-         public void UpdateClassMembers(CppClass a_selectClass)
-        {
-            // Refresh data
-            a_selectClass.members.Clear();
+        // public void UpdateClassMembers(CppClass a_selectClass)
+        //{
+        //    // Refresh data
+        //    a_selectClass.members.Clear();
 
-            // Convert strings to members and add to list
-            foreach (ListViewItem memberRep in LV_Members.Items)
-            {
-                a_selectClass.members.Add(formUtil.StringToMember(memberRep.Text));
-            }
+        //    // Convert strings to members and add to list
+        //    foreach (ListViewItem memberRep in LV_Members.Items)
+        //    {
+        //        a_selectClass.members.Add(formUtil.StringToMember(memberRep.Text));
+        //    }
             
-        }
+        //}
 
         private void BTN_AddClass_Click(object sender, EventArgs e)
         {
@@ -73,14 +73,28 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 var popupForm = new ClassPopup();
                 popupForm.Show();
             }
-
         }
 
         private void BTN_RemoveClass_Click(object sender, EventArgs e)
         {
-            formUtil.RemoveItems(LV_Classes);
+            /// Actual class removal
+            // No items selected, remove end if there is one
+            if (LV_Classes.SelectedItems.Count == 0 && LV_Classes.Items.Count != 0)
+            {
+                classes.RemoveAt(LV_Classes.Items.Count - 1);
+            }
 
-            UpdateClasses();
+            // Item(s) selected, remove them
+            else
+            {
+                foreach (int index in LV_Classes.SelectedIndices)
+                {
+                    classes.RemoveAt(index);
+                }
+            }
+
+            /// Class string removal
+            formUtil.RemoveItems(LV_Classes);
         }
 
         //private void BTN_LoadFile_Click(object sender, EventArgs e)
@@ -169,14 +183,28 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
         private void BTN_RemoveMember_Click(object sender, EventArgs e)
         {
-            formUtil.RemoveItems(LV_Members);
+            /// Actual member removal
+            // No items selected, remove end if there is one
+            if (LV_Members.SelectedItems.Count == 0 && LV_Members.Items.Count != 0)
+            {
+                selectedClass.members.RemoveAt(LV_Members.Items.Count - 1);
+            }
 
-            // Remove members based on modification to list
-            UpdateClassMembers(selectedClass);
+            // Item(s) selected, remove them
+            else
+            {
+                foreach (int index in LV_Members.SelectedIndices)
+                {
+                    selectedClass.members.RemoveAt(index);
+                }
+            }
+
+            /// Member item string removal
+            formUtil.RemoveItems(LV_Members);
         }
 
-        /// Class item click event
-        private void LV_Classes_DoubleClick(object sender, EventArgs e)
+        /// Selecting class
+        private void LV_Classes_Click(object sender, EventArgs e)
         {
             // Refresh items
             LV_Members.Items.Clear();
@@ -194,7 +222,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             PNL_Members.Visible = true;
         }
 
-        /// Member item click event
+        /// Selecting member
         private void LV_Members_DoubleClick(object sender, EventArgs e)
         {
             // Set new focused member index

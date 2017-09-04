@@ -58,8 +58,8 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             // Add class representation
             m_mainForm.LV_Classes.Items.Add(textBuffer);
 
-            // Update class data
-            m_mainForm.UpdateClasses();
+            // Add class to list
+            m_mainForm.classes.Add(formUtil.StringToClass(textBuffer));
 
             return true;
         }

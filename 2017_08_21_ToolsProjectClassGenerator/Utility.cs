@@ -137,7 +137,7 @@ namespace Utilities
                     a_lv.Items.Remove((ListViewItem)(item));
                 }
             }
-        }
+        } 
 
         /**
          * @brief Convert string into C++ member data.
