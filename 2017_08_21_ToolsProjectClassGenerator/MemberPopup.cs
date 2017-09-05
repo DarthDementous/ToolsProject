@@ -13,6 +13,8 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 {
     public partial class MemberPopup : PopupForm
     {
+        public int      selectedParamIndex;
+
         public bool     editMode = false;  /*TRUE = form has been opened to edit existing member, FALSE = form has been opened to add new member*/
 
         private string  textBuffer;
@@ -25,7 +27,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
         public MemberPopup()
         {
-            InitialiseMainForm();
+            InitialiseForms();
             InitializeComponent();
             InitialiseObjects();
         }
@@ -72,6 +74,11 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             {
                 CheckBox_FunctionOpt.Checked = true;
                 isFunc = true;
+
+                // Populate parameters (if any)
+                foreach (var param in a_member.args) {
+                    LV_Params.Items.Add(param.ToString());
+                }
             }
 
             // Change button text to reflect the mode of the form
@@ -106,7 +113,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
             // Determine optional paramter representation
             string virtOpt = (isVirtual) ? "VIRTUAL" : "";
-            string funcBraces = (isFunc) ? "()" : "";
+            string funcBraces = (isFunc) ? "(" : "";
 
             // Determine representation of return type/member type
             string memType = "";
@@ -120,7 +127,22 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 memType = "&";
             }
 
-            // e.g. PRIVATE INLINE int& bagels
+            // Determine parameter string
+            for (int i = 0; i < LV_Params.Items.Count; ++i) {
+                funcBraces += LV_Params.Items[i].Text;
+
+                // Format if not final parameter
+                if (i != LV_Params.Items.Count - 1) {
+                    funcBraces += ", ";
+                }
+            }
+
+            // If function, close off braces
+            if (isFunc) {
+                funcBraces += ")";
+            }
+
+            // e.g. PRIVATE INLINE int& bagels(int thing, const float morg)
             textBuffer = CB_MemberAccess.SelectedItem.ToString() + SPACE + virtOpt + SPACE + CB_Identifiers.SelectedItem.ToString() + SPACE
                 + TXT_Type.Text + memType + SPACE + TXT_MemberName.Text + funcBraces;
 
@@ -134,28 +156,18 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 m_mainForm.LV_Members.Items.Add(textBuffer);
             }
 
-            // Add members based on modifications to list
-            m_mainForm.selectedClass.members.Add(formUtil.StringToMember(textBuffer));
+            // Apply properties to blueprints of current member
+            CppMember currentMember = m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex];      // Added member is at the end of the list 
+
+            currentMember.access        = CB_MemberAccess.SelectedItem.ToString();
+            currentMember.isVirtual     = isVirtual;
+            currentMember.modifier      = CB_Identifiers.SelectedItem.ToString();
+            currentMember.type          = TXT_Type.Text;
+            currentMember.memType       = memType;
+            currentMember.name          = TXT_MemberName.Text;
+            currentMember.isFunction    = isFunc;
 
             return true;
-        }
-
-        private void BTN_AddParam_Click(object sender, EventArgs e)
-        {
-            var popup = formUtil.GetFormByName("ParamPopup");
-
-            // Only load pop up if it hasn't been loaded before
-            if (popup == null)
-            {
-                // Create new instance of pop up form and display
-                var popupForm = new ParamPopup();
-                popupForm.Show();
-            }
-        }
-
-        private void BTN_RemoveParam_Click(object sender, EventArgs e)
-        {
-            formUtil.RemoveItems(LV_Params);
         }
 
         private void CB_VirtualOpt_CheckedChanged(object sender, EventArgs e)
@@ -182,6 +194,70 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             {
                 MessageBox.Show("Not all text fields were filled out.");
             }
+        }
+
+        private void BTN_AddParam_Click(object sender, EventArgs e)
+        {
+            var popup = formUtil.GetFormByName("ParamPopup");
+
+            // Only load pop up if it hasn't been loaded before
+            if (popup == null)
+            {
+                // Create new instance of pop up form and display
+                var popupForm = new ParamPopup();
+                popupForm.Show();
+            }
+        }
+
+        private void BTN_RemoveParam_Click(object sender, EventArgs e)
+        {
+            /// Actual param removal
+            // No items selected, remove end if there is one
+            if (LV_Params.SelectedItems.Count == 0 && LV_Params.Items.Count != 0)
+            {
+                m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args.RemoveAt(LV_Params.Items.Count - 1);
+            }
+
+            // Item(s) selected, remove them
+            else
+            {
+                foreach (int index in LV_Params.SelectedIndices)
+                {
+                    m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args.RemoveAt(index);
+                }
+            }
+
+            /// Param string removal
+            formUtil.RemoveItems(LV_Params);
+        }
+
+        private void LV_Params_DoubleClick(object sender, EventArgs e) {
+            // Set new focused parameter index
+            selectedParamIndex = LV_Params.SelectedIndices[0];
+
+            // Display popup for editing member details
+            var popup = formUtil.GetFormByName("ParamPopup");
+
+            if (popup == null) {
+                // Create new instance of pop up form and display
+                var popupForm = new ParamPopup();
+                popupForm.Show();
+
+                // Load data from selected parameter
+                popupForm.Populate(m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args[selectedParamIndex], true);
+            }
+        }
+
+        private void RB_ValueOpt_CheckedChanged(object sender, EventArgs e) {
+
+        }
+
+        private void RB_PointerOpt_CheckedChanged(object sender, EventArgs e) {
+
+        }
+
+        private void RB_ReferenceOpt_CheckedChanged(object sender, EventArgs e) {
+
         }
     }
 }

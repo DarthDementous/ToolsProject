@@ -170,6 +170,10 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
         private void BTN_AddMember_Click(object sender, EventArgs e)
         {
+            // Add temporary member to allow parameters to be stored before member is added
+            selectedClass.members.Add(new CppMember());
+            selectedMemberIndex = selectedClass.members.Count - 1;
+
             var popup = formUtil.GetFormByName("MemberPopup");
 
             // Only load pop up if it hasn't been loaded before

@@ -16,7 +16,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         // Hold onto instance of main form to access its members
         public ClassPopup()
         {
-            InitialiseMainForm();
+            InitialiseForms();
             InitializeComponent();
             InitialiseObjects();
         }

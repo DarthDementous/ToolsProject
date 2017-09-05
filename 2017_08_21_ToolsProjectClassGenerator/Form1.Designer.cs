@@ -50,6 +50,7 @@
             // LV_Classes
             // 
             this.LV_Classes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.LV_Classes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LV_Classes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.col_classes});
             this.LV_Classes.ForeColor = System.Drawing.Color.OrangeRed;
@@ -124,13 +125,14 @@
             // LV_Members
             // 
             this.LV_Members.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.LV_Members.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LV_Members.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.col_members});
             this.LV_Members.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.LV_Members.Location = new System.Drawing.Point(2, 2);
-            this.LV_Members.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LV_Members.Margin = new System.Windows.Forms.Padding(2);
             this.LV_Members.Name = "LV_Members";
-            this.LV_Members.Size = new System.Drawing.Size(186, 405);
+            this.LV_Members.Size = new System.Drawing.Size(280, 405);
             this.LV_Members.TabIndex = 7;
             this.LV_Members.UseCompatibleStateImageBehavior = false;
             this.LV_Members.View = System.Windows.Forms.View.Details;
@@ -175,9 +177,9 @@
             this.PNL_Members.Controls.Add(this.LV_Members);
             this.PNL_Members.Controls.Add(this.BTN_AddMember);
             this.PNL_Members.Location = new System.Drawing.Point(376, 61);
-            this.PNL_Members.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PNL_Members.Margin = new System.Windows.Forms.Padding(2);
             this.PNL_Members.Name = "PNL_Members";
-            this.PNL_Members.Size = new System.Drawing.Size(185, 471);
+            this.PNL_Members.Size = new System.Drawing.Size(286, 471);
             this.PNL_Members.TabIndex = 13;
             this.PNL_Members.Visible = false;
             // 
