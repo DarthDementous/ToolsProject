@@ -115,37 +115,6 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         //    }
         //}
 
-        private void BTN_SaveFile_Click(object sender, EventArgs e) {
-
-            using (XmlWriter writer = XmlWriter.Create("Classes.xml")) {
-                // Open file stream
-                writer.WriteStartDocument();
-
-                writer.WriteStartElement("CLASSES");            // Create initial hierarchy category
-
-                foreach (CppClass cls in classes) {
-                    writer.WriteStartElement("Class");
-
-                    writer.WriteElementString("VirtualDestructor", cls.isVirtual.ToString());
-                    writer.WriteElementString("Name", cls.name);
-                    writer.WriteElementString("BaseAccess", cls.baseAccess);
-                    writer.WriteElementString("BaseName", cls.baseName);
-
-                    foreach (CppMember member in cls.members) {
-                        writer.WriteStartElement("Member");
-
-                        //writer.WriteElementString("")
-                    }
-
-                    writer.WriteEndElement();
-                }
-
-                writer.WriteEndElement();
-
-                writer.WriteEndDocument();
-            }
-        }
-
         //private void BTN_LoadFile_Click(object sender, EventArgs e)
         //{
         //    try
@@ -275,6 +244,89 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
                 // Load data from selected member
                 popupForm.Populate(selectedClass.members[selectedMemberIndex], true);
+            }
+        }
+
+        private void BTN_LoadFile_Click(object sender, EventArgs e)
+        {
+            using (XmlReader reader = XmlReader.Create("Test_ClassData.xml"))
+            {
+                // Read file line by line
+                while (reader.Read())
+                {
+                    if (reader.NodeType == XmlNodeType.A)
+                }
+            }
+        }
+
+        private void BTN_SaveFile_Click(object sender, EventArgs e)
+        {
+
+            using (XmlWriter writer = XmlWriter.Create("Test_ClassData.xml"))
+            {
+                // Open file stream
+                writer.WriteStartDocument();
+
+                // Write classes
+                writer.WriteStartElement("CLASSES");                // New elements are added lower into the hierarchy
+
+                foreach (CppClass cls in classes)
+                {
+                    writer.WriteStartElement("Class");
+
+                    writer.WriteElementString("isVirtual", cls.isVirtual.ToString());
+                    writer.WriteElementString("name", cls.name);
+                    writer.WriteElementString("base_access", cls.baseAccess);
+                    writer.WriteElementString("base_name", cls.baseName);
+
+                    // Write members
+                    writer.WriteStartElement("MEMBERS");
+
+                    foreach (CppMember member in cls.members)
+                    {
+                        writer.WriteStartElement("Member");
+
+                        writer.WriteElementString("isFunction", member.isFunction.ToString());
+                        writer.WriteElementString("access", member.access);
+                        writer.WriteElementString("isVirtual", member.isVirtual.ToString());
+                        writer.WriteElementString("modifier", member.modifier);
+                        writer.WriteElementString("type", member.type);
+                        writer.WriteElementString("memory_type", member.memType);
+                        writer.WriteElementString("name", member.name);
+
+                        // Write parameters
+                        writer.WriteStartElement("PARAMETERS");
+
+                        foreach (CppMember param in member.args)
+                        {
+                            writer.WriteStartElement("Parameter");
+
+                            writer.WriteElementString("const_status", param.modifier);
+                            writer.WriteElementString("type", param.type);
+                            writer.WriteElementString("memory_type", param.memType);
+                            writer.WriteElementString("name", param.name);
+
+                            writer.WriteEndElement();
+                        }
+
+                        // End PARAMETERS
+                        writer.WriteEndElement();                   // For proper XML formatting, always close out elements
+
+                        // End current member
+                        writer.WriteEndElement();
+                    }
+
+                    // End MEMBERS
+                    writer.WriteEndElement();
+
+                    // End current class
+                    writer.WriteEndElement();
+                }
+
+                // End CLASSES
+                writer.WriteEndElement();
+
+                writer.WriteEndDocument();
             }
         }
     }
