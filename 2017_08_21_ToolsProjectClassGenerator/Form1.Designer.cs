@@ -34,7 +34,7 @@
             this.BTN_RemoveClass = new System.Windows.Forms.Button();
             this.DLG_FindFile = new System.Windows.Forms.FolderBrowserDialog();
             this.DGV_SpreadSheet = new System.Windows.Forms.DataGridView();
-            this.BTN_OpenFile = new System.Windows.Forms.Button();
+            this.BTN_SaveFile = new System.Windows.Forms.Button();
             this.DLG_OpenFile = new System.Windows.Forms.OpenFileDialog();
             this.TXT_SheetName = new System.Windows.Forms.TextBox();
             this.LV_Members = new System.Windows.Forms.ListView();
@@ -104,15 +104,15 @@
             this.DGV_SpreadSheet.Size = new System.Drawing.Size(411, 517);
             this.DGV_SpreadSheet.TabIndex = 4;
             // 
-            // BTN_OpenFile
+            // BTN_SaveFile
             // 
-            this.BTN_OpenFile.Location = new System.Drawing.Point(1029, 600);
-            this.BTN_OpenFile.Name = "BTN_OpenFile";
-            this.BTN_OpenFile.Size = new System.Drawing.Size(75, 23);
-            this.BTN_OpenFile.TabIndex = 5;
-            this.BTN_OpenFile.Text = "Open File";
-            this.BTN_OpenFile.UseVisualStyleBackColor = true;
-            this.BTN_OpenFile.Click += new System.EventHandler(this.BTN_OpenFile_Click);
+            this.BTN_SaveFile.Location = new System.Drawing.Point(1029, 600);
+            this.BTN_SaveFile.Name = "BTN_SaveFile";
+            this.BTN_SaveFile.Size = new System.Drawing.Size(75, 23);
+            this.BTN_SaveFile.TabIndex = 5;
+            this.BTN_SaveFile.Text = "Save File";
+            this.BTN_SaveFile.UseVisualStyleBackColor = true;
+            this.BTN_SaveFile.Click += new System.EventHandler(this.BTN_SaveFile_Click);
             // 
             // TXT_SheetName
             // 
@@ -190,7 +190,7 @@
             this.BackColor = System.Drawing.Color.DimGray;
             this.ClientSize = new System.Drawing.Size(1436, 699);
             this.Controls.Add(this.TXT_SheetName);
-            this.Controls.Add(this.BTN_OpenFile);
+            this.Controls.Add(this.BTN_SaveFile);
             this.Controls.Add(this.DGV_SpreadSheet);
             this.Controls.Add(this.BTN_RemoveClass);
             this.Controls.Add(this.BTN_AddClass);
@@ -214,7 +214,7 @@
         private System.Windows.Forms.Button BTN_RemoveClass;
         private System.Windows.Forms.FolderBrowserDialog DLG_FindFile;
         private System.Windows.Forms.DataGridView DGV_SpreadSheet;
-        private System.Windows.Forms.Button BTN_OpenFile;
+        private System.Windows.Forms.Button BTN_SaveFile;
         private System.Windows.Forms.OpenFileDialog DLG_OpenFile;
         private System.Windows.Forms.TextBox TXT_SheetName;
         public  System.Windows.Forms.ListView LV_Members;

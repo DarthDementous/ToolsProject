@@ -71,27 +71,27 @@ namespace Utilities {
     public class CppClass {
         // ClassName, [isVirtual], [BaseClassName, Access]
         public CppClass(string a_name, bool a_isVirtual = false, string a_baseName = "", string a_access = "PUBLIC") {
-            m_name = a_name;
-            m_isVirtual = a_isVirtual;
+            name = a_name;
+            isVirtual = a_isVirtual;
 
-            m_baseAccess = a_access;
-            m_baseName = a_baseName;
+            baseAccess = a_access;
+            baseName = a_baseName;
         }
 
         public override string ToString() {
             // Determine optional identifiers for class
-            string virtOpt = m_isVirtual ? "VIRTUAL" : "";
-            string inheritOpt = (m_baseName != "") ? (":" + ' ' + m_baseAccess + ' ' + m_baseName) : "";
+            string virtOpt = isVirtual ? "VIRTUAL" : "";
+            string inheritOpt = (baseName != "") ? (":" + ' ' + baseAccess + ' ' + baseName) : "";
 
             // Convert class data into a string
-            return virtOpt + ' ' + m_name + ' ' + inheritOpt;
+            return virtOpt + ' ' + name + ' ' + inheritOpt;
         }
 
-        string m_name;
-        bool m_isVirtual;  /*Determine whether class has a virtual destructor.*/
+        public string name;
+        public bool isVirtual;  /*Determine whether class has a virtual destructor.*/
 
-        string m_baseName;    /*Name of base class.*/
-        string m_baseAccess;  /*Type of inheritance (PUBLIC = default, PROTECTED, PRIVATE)*/
+        public string baseName;    /*Name of base class.*/
+        public string baseAccess;  /*Type of inheritance (PUBLIC = default, PROTECTED, PRIVATE)*/
 
         public List<CppMember> members = new List<CppMember>(); /*Currently held members of class.*/
     }

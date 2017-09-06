@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data.OleDb;
 using Utilities;
+using System.Xml;
 
 namespace _2017_08_21_ToolsProjectClassGenerator
 {
@@ -114,59 +115,90 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         //    }
         //}
 
-        private void BTN_OpenFile_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Filter syntax = "What the user sees | extensions for the computer e.g. *.jpg"
-                DLG_OpenFile.Filter = "XML FILES | *.xml; *.xls; *.xlsx; *.xlsm; *.xlsb;";
-                //DLG_OpenFile.FilterIndex = 2; - Set which filter is selected by default
+        private void BTN_SaveFile_Click(object sender, EventArgs e) {
 
-                DLG_OpenFile.Multiselect        = false;                // One file at a time
-                DLG_OpenFile.Title              = "CHOOSE FILE";       
-                DLG_OpenFile.InitialDirectory   = @"Desktop";
+            using (XmlWriter writer = XmlWriter.Create("Classes.xml")) {
+                // Open file stream
+                writer.WriteStartDocument();
 
-                if (DLG_OpenFile.ShowDialog() == DialogResult.OK)
-                {
-                    string      pathName = DLG_OpenFile.FileName;
-                    string      fileName = Path.GetFileNameWithoutExtension(DLG_OpenFile.FileName);
-                    DataTable   table    = new DataTable();
+                writer.WriteStartElement("CLASSES");            // Create initial hierarchy category
 
-                    string connectionString = "";
-                    string sheetName        = TXT_SheetName.Text;
+                foreach (CppClass cls in classes) {
+                    writer.WriteStartElement("Class");
 
-                    FileInfo file           = new FileInfo(pathName);
-                    
-                    if (!file.Exists) { throw new Exception("File does not exist."); }
+                    writer.WriteElementString("VirtualDestructor", cls.isVirtual.ToString());
+                    writer.WriteElementString("Name", cls.name);
+                    writer.WriteElementString("BaseAccess", cls.baseAccess);
+                    writer.WriteElementString("BaseName", cls.baseName);
 
-                    string ext = file.Extension;
+                    foreach (CppMember member in cls.members) {
+                        writer.WriteStartElement("Member");
 
-                    switch (ext)
-                    {
-                        case ".xls":
-                            connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + pathName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
-                            break;
-                        case ".xlsx":
-                            connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + pathName + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1;'";
-                            break;
-                        default:
-                            connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + pathName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
-                            break;
+                        //writer.WriteElementString("")
                     }
 
-                    OleDbConnection     connectionXLS       = new OleDbConnection(connectionString);
-                    OleDbDataAdapter    connectionAdapter   = new OleDbDataAdapter(string.Format("select * from [" + sheetName + "$", fileName), connectionXLS);
-
-                    connectionAdapter.Fill(table);
-
-                    DGV_SpreadSheet.DataSource = table;
+                    writer.WriteEndElement();
                 }
-            }
-            catch
-            {
-                MessageBox.Show("!?!?!??!?!");
+
+                writer.WriteEndElement();
+
+                writer.WriteEndDocument();
             }
         }
+
+        //private void BTN_LoadFile_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        // Filter syntax = "What the user sees | extensions for the computer e.g. *.jpg"
+        //        DLG_OpenFile.Filter = "XML FILES | *.xml; *.xls; *.xlsx; *.xlsm; *.xlsb;";
+        //        //DLG_OpenFile.FilterIndex = 2; - Set which filter is selected by default
+
+        //        DLG_OpenFile.Multiselect        = false;                // One file at a time
+        //        DLG_OpenFile.Title              = "CHOOSE FILE";       
+        //        DLG_OpenFile.InitialDirectory   = @"Desktop";
+
+        //        if (DLG_OpenFile.ShowDialog() == DialogResult.OK)
+        //        {
+        //            string      pathName = DLG_OpenFile.FileName;
+        //            string      fileName = Path.GetFileNameWithoutExtension(DLG_OpenFile.FileName);
+        //            DataTable   table    = new DataTable();
+
+        //            string connectionString = "";
+        //            string sheetName        = TXT_SheetName.Text;
+
+        //            FileInfo file           = new FileInfo(pathName);
+                    
+        //            if (!file.Exists) { throw new Exception("File does not exist."); }
+
+        //            string ext = file.Extension;
+
+        //            switch (ext)
+        //            {
+        //                case ".xls":
+        //                    connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + pathName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
+        //                    break;
+        //                case ".xlsx":
+        //                    connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + pathName + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1;'";
+        //                    break;
+        //                default:
+        //                    connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + pathName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
+        //                    break;
+        //            }
+
+        //            OleDbConnection     connectionXLS       = new OleDbConnection(connectionString);
+        //            OleDbDataAdapter    connectionAdapter   = new OleDbDataAdapter(string.Format("select * from [" + sheetName + "$", fileName), connectionXLS);
+
+        //            connectionAdapter.Fill(table);
+
+        //            DGV_SpreadSheet.DataSource = table;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        MessageBox.Show("!?!?!??!?!");
+        //    }
+        //}
 
         private void BTN_AddMember_Click(object sender, EventArgs e)
         {
