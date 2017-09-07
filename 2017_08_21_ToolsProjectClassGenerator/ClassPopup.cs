@@ -27,7 +27,52 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         private char    space = ' ';
 
         private bool    isVirtual    = false;
-        private bool    isInheriting = false;
+
+        public bool     editMode = false;  /*TRUE = form has been opened to edit existing member, FALSE = form has been opened to add new member*/
+
+        /**
+        * @brief Load data from class into the popup details.
+        * @param a_member is the member to extract data from.
+        * @param a_editMode is whether class is being modified or added.
+        * @return void.
+        * */
+        public void Populate(CppClass a_cls, bool a_editMode)
+        {
+            editMode = a_editMode;
+
+            TXT_Class.Text = a_cls.name;
+
+            if (a_cls.isVirtual)
+            {
+                CB_VirtualOpt.Checked = true;
+            }
+
+            // Inheritance options
+            if (a_cls.baseName != "")
+            {
+                // Display inheritance options
+                CB_InheritOpt.Checked = true;
+
+                GB_InheritOptions.Visible = true;
+                GB_InheritOptions.Enabled = true;
+
+                CB_Access.SelectedItem  = a_cls.baseAccess;
+                TXT_BaseClass.Text      = a_cls.baseName;
+            } else
+            {
+                // Disable inheritance options
+                CB_InheritOpt.Checked = false;
+
+                GB_InheritOptions.Visible   = false;
+                GB_InheritOptions.Enabled   = false;
+            }
+
+            // Modify button text if in edit mode
+            if (editMode)
+            {
+                BTN_ClassConfirm.Text = "Confirm Changes";
+            }
+        }
 
         private void InitialiseObjects()
         {
@@ -43,23 +88,40 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         protected override bool GenerateFunction()
         {
             // Quit out early with failure if no class or sub-class name (if inheriting)
-            if (TXT_Class.Text == "" || (TXT_BaseClass.Text == "" && isInheriting))
+            if (TXT_Class.Text == "" || (TXT_BaseClass.Text == "" && GB_InheritOptions.Enabled))
             {
                 return false;
             }
 
             // Determine optional identifiers for class
             string virtOpt = isVirtual ? "VIRTUAL" : "";
-            string inheritOpt = isInheriting ? (":" + space + CB_Access.SelectedItem.ToString() + space + TXT_BaseClass.Text) : "";
+            string inheritOpt = GB_InheritOptions.Enabled ? (":" + space + CB_Access.SelectedItem.ToString() + space + TXT_BaseClass.Text) : "";
 
             // Convert class options into string
             textBuffer = virtOpt + space + TXT_Class.Text + space + inheritOpt;
 
-            // Add class representation
-            m_mainForm.LV_Classes.Items.Add(textBuffer);
+            // Modify or add class depending on mode of form
+            if (editMode)
+            {
+                // Modify string representation
+                m_mainForm.LV_Classes.Items[m_mainForm.selectedClassIndex].Text = textBuffer;
 
-            // Add class to list
-            m_mainForm.classes.Add(formUtil.StringToClass(textBuffer));
+                // Update variables of selected class instead of overwriting completely and losing member data
+                CppClass currentClass = m_mainForm.classes[m_mainForm.selectedClassIndex];
+
+                currentClass.isVirtual  = isVirtual;
+                currentClass.name       = TXT_Class.Text;
+                currentClass.baseAccess = CB_Access.SelectedItem.ToString();
+                currentClass.baseName   = TXT_BaseClass.Text;
+            }
+            else
+            {
+                // Add class representation
+                m_mainForm.LV_Classes.Items.Add(textBuffer);
+
+                // Add class to list
+                m_mainForm.classes.Add(formUtil.StringToClass(textBuffer));
+            }
 
             return true;
         }
@@ -83,8 +145,6 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         private void CB_InheritOpt_CheckedChanged(object sender, EventArgs e)
         {
             // Flip activation of inheritance options
-            isInheriting = !isInheriting;
-
             GB_InheritOptions.Enabled = !GB_InheritOptions.Enabled;
             GB_InheritOptions.Visible = !GB_InheritOptions.Visible;
         }

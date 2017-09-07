@@ -25,8 +25,10 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         public FormUtility      formUtil    = new FormUtility();
 
         public CppClass         selectedClass;                          /*Selection indices reset, keep track of focused class.*/
+        public int              selectedClassIndex;
         public int              selectedMemberIndex;                    /*Hold onto index of selected member in case selection indices reset.*/
 
+        public string           currentFileName;                        /*Save name of current file to display and save over.*/
         ///**
         // * @brief Based on class strings in list view, update class data list accordingly.
         // * NOTE: Call everytime the listview is modified. 
@@ -98,77 +100,6 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             formUtil.RemoveItems(LV_Classes);
         }
 
-        //private void BTN_LoadFile_Click(object sender, EventArgs e)
-        //{
-        //    // Suspends entire program until desired result is found (like a while loop)
-        //    if (DLG_FindFile.ShowDialog() == DialogResult.OK)
-        //    {
-        //        //MessageBox.Show(DLG_FindFile.SelectedPath);
-
-        //        // Save and list files with the specified extension in the chosen folder
-        //        string[] fileNames = Directory.GetFiles(DLG_FindFile.SelectedPath, "*.xlsx");
-
-        //        foreach (string name in fileNames)
-        //        {
-        //            LV_Classes.Items.Add(name);
-        //        }
-        //    }
-        //}
-
-        //private void BTN_LoadFile_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        // Filter syntax = "What the user sees | extensions for the computer e.g. *.jpg"
-        //        DLG_OpenFile.Filter = "XML FILES | *.xml; *.xls; *.xlsx; *.xlsm; *.xlsb;";
-        //        //DLG_OpenFile.FilterIndex = 2; - Set which filter is selected by default
-
-        //        DLG_OpenFile.Multiselect        = false;                // One file at a time
-        //        DLG_OpenFile.Title              = "CHOOSE FILE";       
-        //        DLG_OpenFile.InitialDirectory   = @"Desktop";
-
-        //        if (DLG_OpenFile.ShowDialog() == DialogResult.OK)
-        //        {
-        //            string      pathName = DLG_OpenFile.FileName;
-        //            string      fileName = Path.GetFileNameWithoutExtension(DLG_OpenFile.FileName);
-        //            DataTable   table    = new DataTable();
-
-        //            string connectionString = "";
-        //            string sheetName        = TXT_SheetName.Text;
-
-        //            FileInfo file           = new FileInfo(pathName);
-                    
-        //            if (!file.Exists) { throw new Exception("File does not exist."); }
-
-        //            string ext = file.Extension;
-
-        //            switch (ext)
-        //            {
-        //                case ".xls":
-        //                    connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + pathName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
-        //                    break;
-        //                case ".xlsx":
-        //                    connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + pathName + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1;'";
-        //                    break;
-        //                default:
-        //                    connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + pathName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
-        //                    break;
-        //            }
-
-        //            OleDbConnection     connectionXLS       = new OleDbConnection(connectionString);
-        //            OleDbDataAdapter    connectionAdapter   = new OleDbDataAdapter(string.Format("select * from [" + sheetName + "$", fileName), connectionXLS);
-
-        //            connectionAdapter.Fill(table);
-
-        //            DGV_SpreadSheet.DataSource = table;
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        MessageBox.Show("!?!?!??!?!");
-        //    }
-        //}
-
         private void BTN_AddMember_Click(object sender, EventArgs e)
         {
             // Add temporary member to allow parameters to be stored before member is added
@@ -215,7 +146,8 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             LV_Members.Items.Clear();
 
             // Set new focused class
-            selectedClass = classes[LV_Classes.SelectedIndices[0]];
+            selectedClassIndex  = LV_Classes.SelectedIndices[0];
+            selectedClass       = classes[LV_Classes.SelectedIndices[0]];
 
             // Populate member's list with focused class's members
             foreach (var member in selectedClass.members)
@@ -234,7 +166,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             selectedMemberIndex = LV_Members.SelectedIndices[0];
 
             // Display popup for editing member details
-            var popup = formUtil.GetFormByName("ClassPopup");
+            var popup = formUtil.GetFormByName("MemberPopup");
 
             if (popup == null)
             {
@@ -247,22 +179,90 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             }
         }
 
-        private void BTN_LoadFile_Click(object sender, EventArgs e)
+        /// Selecting class
+        private void LV_Classes_DoubleClick(object sender, EventArgs e)
         {
-            using (XmlReader reader = XmlReader.Create("Test_ClassData.xml"))
+            // Display popup for editing class details
+            var popup = formUtil.GetFormByName("ClassPopup");
+
+            if (popup == null)
             {
-                // Read file line by line
-                while (reader.Read())
-                {
-                    if (reader.NodeType == XmlNodeType.A)
-                }
+                // Create new instance of pop up form and display
+                var popupForm = new ClassPopup();
+                popupForm.Show();
+
+                // Load data from selected class
+                popupForm.Populate(selectedClass, true);
             }
         }
 
-        private void BTN_SaveFile_Click(object sender, EventArgs e)
+        private void loadXMLFile(string a_filePath)
         {
+            using (XmlReader reader = XmlReader.Create(a_filePath))
+            {
+                // Refresh all data before loading new data
+                RefreshClassData();
 
-            using (XmlWriter writer = XmlWriter.Create("Test_ClassData.xml"))
+                // Read file line by line
+                while (reader.Read())
+                {
+                    /// CLASS-SPECIFIC DATA
+                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "Class")
+                    {
+                        // Prepare new class structure
+                        CppClass newClass = new CppClass(reader.GetAttribute("name"),
+                            (reader.GetAttribute("isVirtual") == "True" ? true : false),        // Use ternary to convert string to bool
+                            reader.GetAttribute("base_name"),
+                            reader.GetAttribute("base_access"));
+
+                        // Add to list of classes
+                        classes.Add(newClass);
+
+                        // Add string representation
+                        LV_Classes.Items.Add(newClass.ToString());
+                    }
+
+                    /// MEMBER-SPECIFIC DATA
+                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "Member")
+                    {
+                        // Prepare new member structure
+                        CppMember newMember = new CppMember(reader.GetAttribute("access"),
+                            reader.GetAttribute("modifier"),
+                            reader.GetAttribute("type"),
+                            reader.GetAttribute("name"),
+                            reader.GetAttribute("memory_type"),
+                            (reader.GetAttribute("isVirtual") == "True" ? true : false),
+                            (reader.GetAttribute("isFunction") == "True" ? true : false));
+
+                        // Add to current class
+                        classes.Last().members.Add(newMember);
+                    }
+
+                    /// PARAMETER-SPECIFIC DATA
+                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "Parameter")
+                    {
+                        // Prepare new parameter structure
+                        CppMember newParam = new CppMember("",
+                            reader.GetAttribute("const_status"),
+                            reader.GetAttribute("type"),
+                            reader.GetAttribute("name"),
+                            reader.GetAttribute("memory_type"),
+                            false,
+                            false);
+
+                        // Add to current member
+                        classes.Last().members.Last().args.Add(newParam);
+                    }
+                }
+            }
+
+            // Display name of file in form title
+            UpdateFormTitle();
+        }
+
+        private void saveXMLFile (string a_filePath)
+        {
+            using (XmlWriter writer = XmlWriter.Create(a_filePath))
             {
                 // Open file stream
                 writer.WriteStartDocument();
@@ -274,10 +274,11 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 {
                     writer.WriteStartElement("Class");
 
-                    writer.WriteElementString("isVirtual", cls.isVirtual.ToString());
-                    writer.WriteElementString("name", cls.name);
-                    writer.WriteElementString("base_access", cls.baseAccess);
-                    writer.WriteElementString("base_name", cls.baseName);
+                    // NOTE: Attributes are not displayed in the order they are added
+                    writer.WriteAttributeString("isVirtual", cls.isVirtual.ToString());
+                    writer.WriteAttributeString("base_name", cls.baseName);
+                    writer.WriteAttributeString("base_access", cls.baseAccess);
+                    writer.WriteAttributeString("name", cls.name);
 
                     // Write members
                     writer.WriteStartElement("MEMBERS");
@@ -286,13 +287,12 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                     {
                         writer.WriteStartElement("Member");
 
-                        writer.WriteElementString("isFunction", member.isFunction.ToString());
-                        writer.WriteElementString("access", member.access);
-                        writer.WriteElementString("isVirtual", member.isVirtual.ToString());
-                        writer.WriteElementString("modifier", member.modifier);
-                        writer.WriteElementString("type", member.type);
-                        writer.WriteElementString("memory_type", member.memType);
-                        writer.WriteElementString("name", member.name);
+                        writer.WriteAttributeString("name", member.name);
+                        writer.WriteAttributeString("type", member.type);
+                        writer.WriteAttributeString("modifier", member.modifier);
+                        writer.WriteAttributeString("isVirtual", member.isVirtual.ToString());
+                        writer.WriteAttributeString("access", member.access);
+                        writer.WriteAttributeString("isFunction", member.isFunction.ToString());
 
                         // Write parameters
                         writer.WriteStartElement("PARAMETERS");
@@ -301,10 +301,10 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                         {
                             writer.WriteStartElement("Parameter");
 
-                            writer.WriteElementString("const_status", param.modifier);
-                            writer.WriteElementString("type", param.type);
-                            writer.WriteElementString("memory_type", param.memType);
-                            writer.WriteElementString("name", param.name);
+                            writer.WriteAttributeString("name", param.name);
+                            writer.WriteAttributeString("memory_type", param.memType);
+                            writer.WriteAttributeString("type", param.type);
+                            writer.WriteAttributeString("const_status", param.modifier);
 
                             writer.WriteEndElement();
                         }
@@ -328,6 +328,140 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
                 writer.WriteEndDocument();
             }
+
+            // Display name of file in form title
+            UpdateFormTitle();
+        }
+
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            /// Prevent invalid objects from being dropped
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;               // If not a file, return
+
+            string[] dragFiles = (string[])e.Data.GetData(DataFormats.FileDrop);    // Convert files into list of strings
+
+            // Only one .fwg file is considered in the drag and drop process
+            var testExtension = System.IO.Path.GetExtension(dragFiles[0]);
+
+            // Compare extension regardless of capitalization
+            if (testExtension.Equals(".fwg", StringComparison.CurrentCultureIgnoreCase))
+            {
+                // First file is .xml, allow for file to be copied into application
+                e.Effect = DragDropEffects.Copy;
+            } else
+            {
+                e.Effect = DragDropEffects.None;        // NOTE: It is undetermined whether this cancels the drag drop event or is purely for visual feedback
+            }
+        }
+
+        // Event triggered AFTER file drop
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            // First file is assumed to be valid from DragEnter event, so load data from it
+            string[] dragFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            loadXMLFile(dragFiles[0]);
+        }
+
+        private void UpdateFormTitle()
+        {
+            if (currentFileName != null)
+            {
+                // Add open file name to the end of the form title
+                this.Text = "C++ Framework Generator - " + System.IO.Path.GetFileName(currentFileName);
+            }
+            else
+            {
+                this.Text = "C++ Framework Generator";
+            }
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Refresh all items
+            RefreshClassData();
+
+            UpdateFormTitle();
+        }
+
+        private void RefreshClassData()
+        {
+            classes.Clear();
+            LV_Classes.Items.Clear();
+            LV_Members.Items.Clear();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Filter syntax = "What the user sees | extensions for the computer e.g. *.jpg"
+                DLG_OpenFile.Filter = "FRAMEWORK GENERATOR FILES | *.fwg";
+                //DLG_OpenFile.FilterIndex = 2; - Set which filter is selected by default
+
+                DLG_OpenFile.Multiselect = false;                // Only one file at a time
+                DLG_OpenFile.Title = "CHOOSE FILE";
+                DLG_OpenFile.InitialDirectory = @"Desktop";
+
+                if (DLG_OpenFile.ShowDialog() == DialogResult.OK)
+                {
+                    // Ensure further saves will overwrite currently opened file
+                    currentFileName = DLG_OpenFile.FileName;
+
+                    loadXMLFile(currentFileName);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Unable to open file.");
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Filter syntax = "What the user sees | extensions for the computer e.g. *.jpg"
+                DLG_SaveFile.Filter = "FRAMEWORK GENERATOR FILES | *.fwg";
+                DLG_SaveFile.RestoreDirectory = true;       // NOTE: ALWAYS true in Windows Vista/Seven, restores original working directory irregardless of what was selected
+
+                // Suspend program until user has successfully initiated a save
+                if (DLG_SaveFile.ShowDialog() == DialogResult.OK)
+                {
+                    // Set current file to allow it to be saved over
+                    currentFileName = DLG_SaveFile.FileName;
+
+                    saveXMLFile(currentFileName);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Unable to save file.");
+            }
+
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Enable or disable save option depending if file has been saved first
+            if (currentFileName == null)
+            {
+                saveToolStripMenuItem.Enabled = false;
+            } else
+            {
+                saveToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Overwrite current opened file
+            saveXMLFile(currentFileName);
         }
     }
 }

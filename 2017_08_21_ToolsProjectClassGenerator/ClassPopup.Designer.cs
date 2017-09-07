@@ -44,9 +44,10 @@
             this.LBL_ClassName.AutoSize = true;
             this.LBL_ClassName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBL_ClassName.ForeColor = System.Drawing.Color.White;
-            this.LBL_ClassName.Location = new System.Drawing.Point(25, 34);
+            this.LBL_ClassName.Location = new System.Drawing.Point(33, 42);
+            this.LBL_ClassName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LBL_ClassName.Name = "LBL_ClassName";
-            this.LBL_ClassName.Size = new System.Drawing.Size(73, 13);
+            this.LBL_ClassName.Size = new System.Drawing.Size(93, 17);
             this.LBL_ClassName.TabIndex = 6;
             this.LBL_ClassName.Text = "Class Name";
             // 
@@ -55,9 +56,10 @@
             this.CB_InheritOpt.AutoSize = true;
             this.CB_InheritOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CB_InheritOpt.ForeColor = System.Drawing.Color.White;
-            this.CB_InheritOpt.Location = new System.Drawing.Point(28, 109);
+            this.CB_InheritOpt.Location = new System.Drawing.Point(37, 134);
+            this.CB_InheritOpt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CB_InheritOpt.Name = "CB_InheritOpt";
-            this.CB_InheritOpt.Size = new System.Drawing.Size(109, 17);
+            this.CB_InheritOpt.Size = new System.Drawing.Size(143, 21);
             this.CB_InheritOpt.TabIndex = 2;
             this.CB_InheritOpt.Text = "Inherit From Class";
             this.CB_InheritOpt.UseVisualStyleBackColor = true;
@@ -68,9 +70,10 @@
             this.CB_VirtualOpt.AutoSize = true;
             this.CB_VirtualOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CB_VirtualOpt.ForeColor = System.Drawing.Color.White;
-            this.CB_VirtualOpt.Location = new System.Drawing.Point(28, 86);
+            this.CB_VirtualOpt.Location = new System.Drawing.Point(37, 106);
+            this.CB_VirtualOpt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CB_VirtualOpt.Name = "CB_VirtualOpt";
-            this.CB_VirtualOpt.Size = new System.Drawing.Size(107, 17);
+            this.CB_VirtualOpt.Size = new System.Drawing.Size(140, 21);
             this.CB_VirtualOpt.TabIndex = 1;
             this.CB_VirtualOpt.Text = "Virtual Destructor";
             this.CB_VirtualOpt.UseVisualStyleBackColor = true;
@@ -81,9 +84,10 @@
             this.BTN_ClassConfirm.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BTN_ClassConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_ClassConfirm.ForeColor = System.Drawing.Color.OrangeRed;
-            this.BTN_ClassConfirm.Location = new System.Drawing.Point(83, 203);
+            this.BTN_ClassConfirm.Location = new System.Drawing.Point(111, 250);
+            this.BTN_ClassConfirm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BTN_ClassConfirm.Name = "BTN_ClassConfirm";
-            this.BTN_ClassConfirm.Size = new System.Drawing.Size(119, 44);
+            this.BTN_ClassConfirm.Size = new System.Drawing.Size(159, 54);
             this.BTN_ClassConfirm.TabIndex = 5;
             this.BTN_ClassConfirm.Text = "Generate Class";
             this.BTN_ClassConfirm.UseVisualStyleBackColor = false;
@@ -94,9 +98,10 @@
             this.TXT_Class.BackColor = System.Drawing.Color.DarkGray;
             this.TXT_Class.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_Class.ForeColor = System.Drawing.Color.Black;
-            this.TXT_Class.Location = new System.Drawing.Point(28, 50);
+            this.TXT_Class.Location = new System.Drawing.Point(37, 62);
+            this.TXT_Class.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TXT_Class.Name = "TXT_Class";
-            this.TXT_Class.Size = new System.Drawing.Size(222, 20);
+            this.TXT_Class.Size = new System.Drawing.Size(295, 22);
             this.TXT_Class.TabIndex = 0;
             // 
             // GB_InheritOptions
@@ -106,9 +111,11 @@
             this.GB_InheritOptions.Enabled = false;
             this.GB_InheritOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GB_InheritOptions.ForeColor = System.Drawing.Color.White;
-            this.GB_InheritOptions.Location = new System.Drawing.Point(14, 135);
+            this.GB_InheritOptions.Location = new System.Drawing.Point(19, 166);
+            this.GB_InheritOptions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GB_InheritOptions.Name = "GB_InheritOptions";
-            this.GB_InheritOptions.Size = new System.Drawing.Size(253, 50);
+            this.GB_InheritOptions.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GB_InheritOptions.Size = new System.Drawing.Size(337, 62);
             this.GB_InheritOptions.TabIndex = 7;
             this.GB_InheritOptions.TabStop = false;
             this.GB_InheritOptions.Text = "Base Class Options";
@@ -124,9 +131,10 @@
             "PUBLIC",
             "PROTECTED",
             "PRIVATE"});
-            this.CB_Access.Location = new System.Drawing.Point(16, 18);
+            this.CB_Access.Location = new System.Drawing.Point(21, 22);
+            this.CB_Access.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CB_Access.Name = "CB_Access";
-            this.CB_Access.Size = new System.Drawing.Size(107, 21);
+            this.CB_Access.Size = new System.Drawing.Size(141, 25);
             this.CB_Access.TabIndex = 3;
             // 
             // TXT_BaseClass
@@ -135,17 +143,18 @@
             this.TXT_BaseClass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_BaseClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_BaseClass.ForeColor = System.Drawing.Color.Black;
-            this.TXT_BaseClass.Location = new System.Drawing.Point(131, 18);
+            this.TXT_BaseClass.Location = new System.Drawing.Point(175, 22);
+            this.TXT_BaseClass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TXT_BaseClass.Name = "TXT_BaseClass";
-            this.TXT_BaseClass.Size = new System.Drawing.Size(107, 20);
+            this.TXT_BaseClass.Size = new System.Drawing.Size(142, 23);
             this.TXT_BaseClass.TabIndex = 4;
             // 
             // ClassPopup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(379, 322);
             this.Controls.Add(this.LBL_ClassName);
             this.Controls.Add(this.CB_InheritOpt);
             this.Controls.Add(this.CB_VirtualOpt);
@@ -153,8 +162,9 @@
             this.Controls.Add(this.TXT_Class);
             this.Controls.Add(this.GB_InheritOptions);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ClassPopup";
-            this.Text = "class_popup";
+            this.Text = "Enter Class Details";
             this.TopMost = true;
             this.GB_InheritOptions.ResumeLayout(false);
             this.GB_InheritOptions.PerformLayout();
