@@ -56,7 +56,7 @@
             this.LBL_Type.AutoSize = true;
             this.LBL_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBL_Type.ForeColor = System.Drawing.Color.White;
-            this.LBL_Type.Location = new System.Drawing.Point(39, 74);
+            this.LBL_Type.Location = new System.Drawing.Point(39, 83);
             this.LBL_Type.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LBL_Type.Name = "LBL_Type";
             this.LBL_Type.Size = new System.Drawing.Size(49, 17);
@@ -84,7 +84,7 @@
             this.BTN_ParamConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_ParamConfirm.ForeColor = System.Drawing.Color.OrangeRed;
             this.BTN_ParamConfirm.Location = new System.Drawing.Point(107, 239);
-            this.BTN_ParamConfirm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BTN_ParamConfirm.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_ParamConfirm.Name = "BTN_ParamConfirm";
             this.BTN_ParamConfirm.Size = new System.Drawing.Size(159, 54);
             this.BTN_ParamConfirm.TabIndex = 7;
@@ -97,7 +97,7 @@
             this.CB_ConstOpt.AutoSize = true;
             this.CB_ConstOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CB_ConstOpt.ForeColor = System.Drawing.Color.White;
-            this.CB_ConstOpt.Location = new System.Drawing.Point(43, 148);
+            this.CB_ConstOpt.Location = new System.Drawing.Point(43, 152);
             this.CB_ConstOpt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CB_ConstOpt.Name = "CB_ConstOpt";
             this.CB_ConstOpt.Size = new System.Drawing.Size(80, 21);
@@ -142,7 +142,7 @@
             this.TXT_ParamType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_ParamType.ForeColor = System.Drawing.Color.Black;
             this.TXT_ParamType.Location = new System.Drawing.Point(43, 39);
-            this.TXT_ParamType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TXT_ParamType.Margin = new System.Windows.Forms.Padding(4);
             this.TXT_ParamType.Name = "TXT_ParamType";
             this.TXT_ParamType.Size = new System.Drawing.Size(295, 22);
             this.TXT_ParamType.TabIndex = 1;
@@ -152,8 +152,8 @@
             this.TXT_ParamName.BackColor = System.Drawing.Color.DarkGray;
             this.TXT_ParamName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TXT_ParamName.ForeColor = System.Drawing.Color.Black;
-            this.TXT_ParamName.Location = new System.Drawing.Point(43, 94);
-            this.TXT_ParamName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TXT_ParamName.Location = new System.Drawing.Point(43, 103);
+            this.TXT_ParamName.Margin = new System.Windows.Forms.Padding(4);
             this.TXT_ParamName.Name = "TXT_ParamName";
             this.TXT_ParamName.Size = new System.Drawing.Size(295, 22);
             this.TXT_ParamName.TabIndex = 2;

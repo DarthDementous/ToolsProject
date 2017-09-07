@@ -56,7 +56,7 @@
             this.RB_ValueOpt.Checked = true;
             this.RB_ValueOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RB_ValueOpt.ForeColor = System.Drawing.SystemColors.Control;
-            this.RB_ValueOpt.Location = new System.Drawing.Point(40, 171);
+            this.RB_ValueOpt.Location = new System.Drawing.Point(36, 176);
             this.RB_ValueOpt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RB_ValueOpt.Name = "RB_ValueOpt";
             this.RB_ValueOpt.Size = new System.Drawing.Size(65, 21);
@@ -71,7 +71,7 @@
             this.RB_ReferenceOpt.AutoSize = true;
             this.RB_ReferenceOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RB_ReferenceOpt.ForeColor = System.Drawing.SystemColors.Control;
-            this.RB_ReferenceOpt.Location = new System.Drawing.Point(248, 171);
+            this.RB_ReferenceOpt.Location = new System.Drawing.Point(267, 176);
             this.RB_ReferenceOpt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RB_ReferenceOpt.Name = "RB_ReferenceOpt";
             this.RB_ReferenceOpt.Size = new System.Drawing.Size(95, 21);
@@ -85,7 +85,7 @@
             this.RB_PointerOpt.AutoSize = true;
             this.RB_PointerOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RB_PointerOpt.ForeColor = System.Drawing.SystemColors.Control;
-            this.RB_PointerOpt.Location = new System.Drawing.Point(145, 171);
+            this.RB_PointerOpt.Location = new System.Drawing.Point(147, 176);
             this.RB_PointerOpt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RB_PointerOpt.Name = "RB_PointerOpt";
             this.RB_PointerOpt.Size = new System.Drawing.Size(74, 21);
@@ -143,7 +143,7 @@
             this.CheckBox_FunctionOpt.AutoSize = true;
             this.CheckBox_FunctionOpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CheckBox_FunctionOpt.ForeColor = System.Drawing.SystemColors.Control;
-            this.CheckBox_FunctionOpt.Location = new System.Drawing.Point(40, 228);
+            this.CheckBox_FunctionOpt.Location = new System.Drawing.Point(37, 224);
             this.CheckBox_FunctionOpt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CheckBox_FunctionOpt.Name = "CheckBox_FunctionOpt";
             this.CheckBox_FunctionOpt.Size = new System.Drawing.Size(110, 21);
@@ -220,7 +220,7 @@
             this.GB_FuncOptions.Enabled = false;
             this.GB_FuncOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GB_FuncOptions.ForeColor = System.Drawing.Color.White;
-            this.GB_FuncOptions.Location = new System.Drawing.Point(37, 298);
+            this.GB_FuncOptions.Location = new System.Drawing.Point(37, 273);
             this.GB_FuncOptions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GB_FuncOptions.Name = "GB_FuncOptions";
             this.GB_FuncOptions.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -302,7 +302,7 @@
             this.BTN_MemberConfirm.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.BTN_MemberConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_MemberConfirm.ForeColor = System.Drawing.Color.OrangeRed;
-            this.BTN_MemberConfirm.Location = new System.Drawing.Point(124, 622);
+            this.BTN_MemberConfirm.Location = new System.Drawing.Point(124, 608);
             this.BTN_MemberConfirm.Margin = new System.Windows.Forms.Padding(4);
             this.BTN_MemberConfirm.Name = "BTN_MemberConfirm";
             this.BTN_MemberConfirm.Size = new System.Drawing.Size(159, 54);
