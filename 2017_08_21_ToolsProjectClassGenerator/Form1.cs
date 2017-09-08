@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 using System.Data.OleDb;
 using Utilities;
 using System.Xml;
@@ -92,7 +93,20 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             {
                 foreach (int index in LV_Classes.SelectedIndices)
                 {
-                    classes.RemoveAt(index);
+                    // Instead of removing, replace removed classes with null to preserve indices
+                    classes[index] = null;
+                }
+
+                // Remove null classes
+                for (int i = 0; i < classes.Count; ++i)
+                {
+                    if (classes[i] == null)
+                    {
+                        classes.Remove(classes[i]);
+
+                        // Decrease index to avoid skipping over elements after modifying list
+                        --i;
+                    }
                 }
             }
 
@@ -131,7 +145,20 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             {
                 foreach (int index in LV_Members.SelectedIndices)
                 {
-                    selectedClass.members.RemoveAt(index);
+                    // Instead of removing, replace removed members with null to preserve indices
+                    selectedClass.members[index] = null;
+                }
+
+                // Remove null members
+                for (int i = 0; i < selectedClass.members.Count; ++i)
+                {
+                    if (selectedClass.members[i] == null)
+                    {
+                        selectedClass.members.Remove(selectedClass.members[i]);
+
+                        // Decrease index to avoid skipping over elements after modifying list
+                        --i;
+                    }
                 }
             }
 
@@ -462,6 +489,26 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         {
             // Overwrite current opened file
             saveXMLFile(currentFileName);
+        }
+
+        private void userGuideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Get temporary file name, and change extension so its prepared to store .chm data
+            var userGuideFileName = Path.ChangeExtension(Path.GetTempFileName(), ".chm");
+            
+            // Create temporary file at temporary file path with the intention of writing to it
+            using (FileStream fileStream = new FileStream(userGuideFileName, FileMode.Create, FileAccess.Write))
+            {
+                // Prepare file for writing binary
+                using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
+                {
+                    // Use byte string returned by resources to copy data of the .chm into the temporary file
+                    binaryWriter.Write(Properties.Resources.C___Framework_Generator_User_Guide);
+                }
+            }
+
+            // Open and run the temporary .chm file
+            System.Diagnostics.Process.Start(userGuideFileName);
         }
     }
 }

@@ -223,7 +223,20 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             {
                 foreach (int index in LV_Params.SelectedIndices)
                 {
-                    m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args.RemoveAt(index);
+                    // Instead of removing, replace removed parameters with null to preserve indices
+                    m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args[index] = null;
+                }
+
+                // Remove null parameters
+                for (int i = 0; i < m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args.Count; ++i)
+                {
+                    if (m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args[i] == null)
+                    {
+                        m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args.Remove(m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args[i]);
+
+                        // Decrease index to avoid skipping over elements after modifying list
+                        --i;
+                    }
                 }
             }
 

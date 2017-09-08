@@ -48,6 +48,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DLG_SaveFile = new System.Windows.Forms.SaveFileDialog();
+            this.HP_UserGuide = new System.Windows.Forms.HelpProvider();
             this.PNL_Members.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -242,8 +243,9 @@
             // userGuideToolStripMenuItem
             // 
             this.userGuideToolStripMenuItem.Name = "userGuideToolStripMenuItem";
-            this.userGuideToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.userGuideToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.userGuideToolStripMenuItem.Text = "User Guide";
+            this.userGuideToolStripMenuItem.Click += new System.EventHandler(this.userGuideToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -258,9 +260,11 @@
             this.Controls.Add(this.PNL_Members);
             this.Controls.Add(this.mainMenuStrip);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.HP_UserGuide.SetHelpKeyword(this, "");
             this.MainMenuStrip = this.mainMenuStrip;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
+            this.HP_UserGuide.SetShowHelp(this, true);
             this.Text = " C++ Code Framework Generator";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
@@ -294,6 +298,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem userGuideToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog DLG_SaveFile;
+        private System.Windows.Forms.HelpProvider HP_UserGuide;
     }
 }
 
