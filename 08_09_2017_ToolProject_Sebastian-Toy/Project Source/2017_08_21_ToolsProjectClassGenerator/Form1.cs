@@ -131,7 +131,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 if (DLG_OpenFile.ShowDialog() == DialogResult.OK)
                 {
                     // Interpret .fwg file
-                    loadXMLFile(currentFileName);
+                    loadXMLFile(DLG_OpenFile.FileName);
                 }
             }
             catch
