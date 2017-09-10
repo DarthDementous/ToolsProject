@@ -104,7 +104,6 @@
             this.CB_ConstOpt.TabIndex = 3;
             this.CB_ConstOpt.Text = "Is Const";
             this.CB_ConstOpt.UseVisualStyleBackColor = true;
-            this.CB_ConstOpt.CheckedChanged += new System.EventHandler(this.CB_ConstOpt_CheckedChanged);
             // 
             // RB_ReferenceOpt
             // 

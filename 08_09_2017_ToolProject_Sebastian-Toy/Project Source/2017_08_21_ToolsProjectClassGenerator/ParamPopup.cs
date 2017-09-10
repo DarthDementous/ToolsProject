@@ -13,15 +13,15 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 {
     public partial class ParamPopup : PopupForm
     {
-        public bool editMode = false;  /*TRUE = form has been opened to edit existing parameter, FALSE = form has been opened to add new parameter*/
-
-        // Hold onto instance of main form to access its members
         public ParamPopup()
         {
             InitializeComponent();
             InitialiseObjects();
             InitialiseForms();
         }
+        private FormUtility.eMemType memoryStatus = FormUtility.eMemType.VAL;      // Whether variable is a ptr, reference or value (default)
+
+        private MemberPopup m_memberPopup;
 
         /**
         * @brief Load data from parameter into the form details.
@@ -29,28 +29,36 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         * @param a_editMode is whether member is being modified or added.
         * @return void.
         * */
-        public void Populate(CppMember a_param, bool a_editMode) {
+        public void Populate(CppMember a_param, bool a_editMode)
+        {
             editMode = a_editMode;
 
             TXT_ParamName.Text = a_param.name;
             TXT_ParamType.Text = a_param.type;
 
             // Const status
-            if (a_param.modifier == "CONST") {
+            if (a_param.modifier == "CONST")
+            {
                 CB_ConstOpt.Checked = true;
             }
 
             // Memory type
-            if (a_param.memType == "*") {
+            if (a_param.memType == "*")
+            {
                 RB_PointerOpt.Checked = true;
-            } else if (a_param.memType == "&") {
+            }
+            else if (a_param.memType == "&")
+            {
                 RB_ReferenceOpt.Checked = true;
-            } else {
+            }
+            else
+            {
                 RB_ValOpt.Checked = true;
             }
 
             // Change button text to reflect the mode of the form
-            if (editMode) {
+            if (editMode)
+            {
                 BTN_ParamConfirm.Text = "Confirm Changes";
             }
 
@@ -62,6 +70,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             RB_ValOpt.Checked = true;
         }
 
+        // Override to allow access to main form and member pop-up form
         protected override void InitialiseForms()
         {
             // Assign pointer to main form
@@ -71,16 +80,12 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             m_memberPopup = (MemberPopup)Application.OpenForms["MemberPopup"];
         }
 
-        public FormUtility formUtil = new FormUtility();
-
-        public string   textBuffer;
-        private char    SPACE = ' ';
-
-        private bool isConst = false;
-        private FormUtility.eMemType memoryStatus = FormUtility.eMemType.VAL;      // Whether variable is a ptr, reference or value
-
-        private MemberPopup m_memberPopup;
-        protected override bool GenerateFunction()
+        /**
+        *   @brief Using user specified info, add string of parameter representation to listview.
+        *   NOTE: Overrides GenerateItem
+        *   @return Bool of whether item was successfully generated or not.
+        * */
+        protected override bool GenerateItem()
         {
             // Quit out early if no parameter name or type
             if (TXT_ParamName.Text == "" || TXT_ParamType.Text == "")
@@ -89,7 +94,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             }
 
             // Determine representation for non-textbox choices
-            string constant = (isConst) ? "CONST" : "";
+            string constant = (CB_ConstOpt.Checked) ? "CONST" : "";
             string type = TXT_ParamType.Text;
 
             switch (memoryStatus)
@@ -103,31 +108,28 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             }
 
             // Generate string to represent parameter and add to list
-            textBuffer = constant + SPACE + type + SPACE + TXT_ParamName.Text;
+            textBuffer = constant + space + type + space + TXT_ParamName.Text;
 
             // Modify current selected parameter or add new one depending on form mode
-            if (editMode) {
+            if (editMode)
+            {
                 m_memberPopup.LV_Params.Items[m_mainForm.selectedMemberIndex].Text = textBuffer;
 
                 // Modify actual parameter of current member
                 m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args[m_memberPopup.selectedParamIndex] = formUtil.StringToParam(textBuffer);
-            } else {
+            }
+            else
+            {
                 m_memberPopup.LV_Params.Items.Add(textBuffer);
-                
+
                 // Add actual parameter to current member
                 m_mainForm.selectedClass.members[m_mainForm.selectedMemberIndex].args.Add(formUtil.StringToParam(textBuffer));
             }
 
-
-
             return true;
         }
 
-        private void CB_ConstOpt_CheckedChanged(object sender, EventArgs e)
-        {
-            isConst = !isConst;
-        }
-
+        #region Form Element Events
         private void RB_PointerOpt_CheckedChanged(object sender, EventArgs e)
         {
             memoryStatus = FormUtility.eMemType.PTR;
@@ -145,12 +147,8 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
         private void BTN_ParamConfirm_Click(object sender, EventArgs e)
         {
-            // Assess success of class creation and provide feedback.
-            if (GenerateFunction()) {
-                this.Close();
-            } else {
-                MessageBox.Show("Not all text fields were filled out.");
-            }
+            ConfirmItem();
         }
+        #endregion
     }
 }

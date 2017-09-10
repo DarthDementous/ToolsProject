@@ -64,7 +64,6 @@
             this.RB_ValueOpt.TabStop = true;
             this.RB_ValueOpt.Text = "Value";
             this.RB_ValueOpt.UseVisualStyleBackColor = true;
-            this.RB_ValueOpt.CheckedChanged += new System.EventHandler(this.RB_ValueOpt_CheckedChanged);
             // 
             // RB_ReferenceOpt
             // 
@@ -78,7 +77,6 @@
             this.RB_ReferenceOpt.TabIndex = 6;
             this.RB_ReferenceOpt.Text = "Reference";
             this.RB_ReferenceOpt.UseVisualStyleBackColor = true;
-            this.RB_ReferenceOpt.CheckedChanged += new System.EventHandler(this.RB_ReferenceOpt_CheckedChanged);
             // 
             // RB_PointerOpt
             // 
@@ -92,7 +90,6 @@
             this.RB_PointerOpt.TabIndex = 5;
             this.RB_PointerOpt.Text = "Pointer";
             this.RB_PointerOpt.UseVisualStyleBackColor = true;
-            this.RB_PointerOpt.CheckedChanged += new System.EventHandler(this.RB_PointerOpt_CheckedChanged);
             // 
             // CB_MemberAccess
             // 
@@ -217,7 +214,6 @@
             this.GB_FuncOptions.Controls.Add(this.BTN_RemoveParam);
             this.GB_FuncOptions.Controls.Add(this.LV_Params);
             this.GB_FuncOptions.Controls.Add(this.BTN_AddParam);
-            this.GB_FuncOptions.Enabled = false;
             this.GB_FuncOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GB_FuncOptions.ForeColor = System.Drawing.Color.White;
             this.GB_FuncOptions.Location = new System.Drawing.Point(37, 273);
@@ -242,7 +238,6 @@
             this.CheckBox_VirtualOpt.TabIndex = 8;
             this.CheckBox_VirtualOpt.Text = "Is Virtual";
             this.CheckBox_VirtualOpt.UseVisualStyleBackColor = true;
-            this.CheckBox_VirtualOpt.CheckedChanged += new System.EventHandler(this.CB_VirtualOpt_CheckedChanged);
             // 
             // BTN_RemoveParam
             // 

@@ -13,22 +13,12 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 {
     public partial class ClassPopup : PopupForm
     {
-        // Hold onto instance of main form to access its members
         public ClassPopup()
         {
             InitialiseForms();
             InitializeComponent();
             InitialiseObjects();
         }
-
-        public FormUtility formUtil = new FormUtility();
-
-        public string   textBuffer;
-        private char    space = ' ';
-
-        private bool    isVirtual    = false;
-
-        public bool     editMode = false;  /*TRUE = form has been opened to edit existing member, FALSE = form has been opened to add new member*/
 
         /**
         * @brief Load data from class into the popup details.
@@ -40,8 +30,10 @@ namespace _2017_08_21_ToolsProjectClassGenerator
         {
             editMode = a_editMode;
 
+            // Class name
             TXT_Class.Text = a_cls.name;
 
+            // Virtual option
             if (a_cls.isVirtual)
             {
                 CB_VirtualOpt.Checked = true;
@@ -50,11 +42,9 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             // Inheritance options
             if (a_cls.baseName != "")
             {
-                // Display inheritance options
+                // Tick box and display inheritance options
                 CB_InheritOpt.Checked = true;
-
                 GB_InheritOptions.Visible = true;
-                GB_InheritOptions.Enabled = true;
 
                 CB_Access.SelectedItem  = a_cls.baseAccess;
                 TXT_BaseClass.Text      = a_cls.baseName;
@@ -62,9 +52,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
             {
                 // Disable inheritance options
                 CB_InheritOpt.Checked = false;
-
                 GB_InheritOptions.Visible   = false;
-                GB_InheritOptions.Enabled   = false;
             }
 
             // Modify button text if in edit mode
@@ -82,20 +70,20 @@ namespace _2017_08_21_ToolsProjectClassGenerator
 
         /**
         *   @brief Using user specified info, add string of class representation to listview.
-        *   NOTE: Overrides GenerateFunction in KeyForm sub-class.
-        *   @return Bool of whether function was successfully generated or not (empty parameters).
+        *   NOTE: Overrides GenerateItem.
+        *   @return Bool of whether item was successfully generated or not (empty parameters).
         *   */
-        protected override bool GenerateFunction()
+        protected override bool GenerateItem()
         {
             // Quit out early with failure if no class or sub-class name (if inheriting)
-            if (TXT_Class.Text == "" || (TXT_BaseClass.Text == "" && GB_InheritOptions.Enabled))
+            if (TXT_Class.Text == "" || (TXT_BaseClass.Text == "" && CB_InheritOpt.Checked))
             {
                 return false;
             }
 
             // Determine optional identifiers for class
-            string virtOpt = isVirtual ? "VIRTUAL" : "";
-            string inheritOpt = GB_InheritOptions.Enabled ? (":" + space + CB_Access.SelectedItem.ToString() + space + TXT_BaseClass.Text) : "";
+            string virtOpt = CB_VirtualOpt.Checked ? "VIRTUAL" : "";
+            string inheritOpt = CB_InheritOpt.Checked ? (":" + space + CB_Access.SelectedItem.ToString() + space + TXT_BaseClass.Text) : "";
 
             // Convert class options into string
             textBuffer = virtOpt + space + TXT_Class.Text + space + inheritOpt;
@@ -109,7 +97,7 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 // Update variables of selected class instead of overwriting completely and losing member data
                 CppClass currentClass = m_mainForm.classes[m_mainForm.selectedClassIndex];
 
-                currentClass.isVirtual  = isVirtual;
+                currentClass.isVirtual  = CB_VirtualOpt.Checked;
                 currentClass.name       = TXT_Class.Text;
                 currentClass.baseAccess = CB_Access.SelectedItem.ToString();
                 currentClass.baseName   = TXT_BaseClass.Text;
@@ -123,36 +111,22 @@ namespace _2017_08_21_ToolsProjectClassGenerator
                 m_mainForm.classes.Add(formUtil.StringToClass(textBuffer));
             }
 
+            // Item successfully generated
             return true;
         }
 
+        #region Form Element Events
         private void BTN_ClassConfirm_Click(object sender, EventArgs e)
         {
-            // Assess success of class creation and provide feedback.
-            if (GenerateFunction())
-            {
-                this.Close();
-
-            }
-            else
-            {
-                MessageBox.Show("Not all text fields were filled out.");
-            }
-
-            /// TODO: Hitting enter when text field is not in focus targets button and triggers class confirm as well as the enter key press meaning two message boxes come up.
+            ConfirmItem();
         }
 
         private void CB_InheritOpt_CheckedChanged(object sender, EventArgs e)
         {
             // Flip activation of inheritance options
-            GB_InheritOptions.Enabled = !GB_InheritOptions.Enabled;
             GB_InheritOptions.Visible = !GB_InheritOptions.Visible;
         }
-
-        private void CB_VirtualOpt_CheckedChanged(object sender, EventArgs e)
-        {
-            isVirtual = !isVirtual;
-        }
+        #endregion
     }
 
 }

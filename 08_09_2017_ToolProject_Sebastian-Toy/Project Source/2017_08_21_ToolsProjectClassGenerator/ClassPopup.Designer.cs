@@ -77,7 +77,6 @@
             this.CB_VirtualOpt.TabIndex = 1;
             this.CB_VirtualOpt.Text = "Virtual Destructor";
             this.CB_VirtualOpt.UseVisualStyleBackColor = true;
-            this.CB_VirtualOpt.CheckedChanged += new System.EventHandler(this.CB_VirtualOpt_CheckedChanged);
             // 
             // BTN_ClassConfirm
             // 
@@ -108,7 +107,6 @@
             // 
             this.GB_InheritOptions.Controls.Add(this.CB_Access);
             this.GB_InheritOptions.Controls.Add(this.TXT_BaseClass);
-            this.GB_InheritOptions.Enabled = false;
             this.GB_InheritOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GB_InheritOptions.ForeColor = System.Drawing.Color.White;
             this.GB_InheritOptions.Location = new System.Drawing.Point(21, 166);
